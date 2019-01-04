@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
-import { PanelPrincipalComponent } from './panel-principal/panel-principal.component';
 
 const routes: Routes = [
 	{
@@ -15,7 +14,7 @@ const routes: Routes = [
 		path: 'dashboard',
 		component: AdminComponent,
 		children: [
-			{ path: '', component: PanelPrincipalComponent }
+			{ path: '', component: DashboardComponent }
 		]
 	}
 ];

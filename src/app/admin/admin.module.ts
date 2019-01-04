@@ -5,8 +5,11 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatButtonModule} from '@angular/material/button';
-import { PanelPrincipalComponent } from './panel-principal/panel-principal.component';
-import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule } from '@angular/material';
+import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatToolbarModule, MatSidenavModule, MatListModule, MatFormFieldModule, MatInputModule, MatStepperModule, MatSelectModule, MatTableModule, MatChipsModule, MatSlideToggleModule } from '@angular/material';
+import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
 
 @NgModule({
     imports: [
@@ -16,8 +19,29 @@ import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule } from '
         MatGridListModule,
         MatMenuModule,
         MatIconModule,
-        MatCardModule
+        MatCardModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatGridListModule,
+        MatCardModule,
+        MatMenuModule,
+        MatFormFieldModule,
+        MatInputModule,
+        // AngularFontAwesomeModule,
+        ReactiveFormsModule,
+        NgMaterialMultilevelMenuModule,
+        MatStepperModule,
+        MatSelectModule,
+        MatTableModule,
+        MatChipsModule,
+        MatSlideToggleModule,
+        FormsModule,
+        // NgBreadcrumbModule,
     ],
-    declarations: [AdminComponent, DashboardComponent, PanelPrincipalComponent]
+    declarations: [AdminComponent, DashboardComponent, MenuLateralComponent]
 })
 export class AdminModule { }

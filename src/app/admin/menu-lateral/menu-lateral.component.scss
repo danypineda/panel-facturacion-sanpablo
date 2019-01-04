@@ -1,0 +1,32 @@
+.sidenav-container {
+    height: 100%;
+  }
+  
+  .sidenav {
+    width: 250px;
+    box-shadow: 3px 0 6px rgba(0,0,0,.24);
+  }
+  
+  .active-link {
+    background-color: rgba(128, 128, 128, 0.292);
+  }
+  .logo{
+    height: 3rem;
+    margin: 0 auto;
+  }
+  
+  .user-nombre{
+  font-size: .8rem;
+  font-weight: bolder;
+  }
+  
+  .perfil{
+    height: 90px;
+    width: 90px;
+  }
+  
+  .user-rol{
+    font-size: .6rem;
+    font-weight: bold;
+    color: #cccccc;
+  }
