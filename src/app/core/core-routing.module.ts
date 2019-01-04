@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'form',
+        redirectTo: 'login',
         pathMatch: 'full'
     },
     {
@@ -16,7 +16,7 @@ const routes: Routes = [
     },
     {
         path: 'admin',
-        canActivate: [AuthGuardService],
+        // canActivate: [AuthGuardService],
         loadChildren: '../admin/admin.module#AdminModule'
     },
     {

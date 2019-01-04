@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { PanelPrincipalComponent } from './panel-principal/panel-principal.component';
 
 const routes: Routes = [
 	{
@@ -13,13 +15,17 @@ const routes: Routes = [
 		path: 'dashboard',
 		component: AdminComponent,
 		children: [
-			{ path: '', component: DashboardComponent }
+			{ path: '', component: PanelPrincipalComponent }
 		]
 	}
 ];
 
 @NgModule({
-	imports: [RouterModule.forChild(routes)],
+	imports: [
+		RouterModule.forChild(routes),
+		MatButtonModule, 
+		MatCheckboxModule
+	],
 	exports: [RouterModule]
 })
 export class AdminRoutingModule { }
