@@ -42,6 +42,10 @@ import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
         FormsModule,
         // NgBreadcrumbModule,
     ],
-    declarations: [AdminComponent, DashboardComponent, MenuLateralComponent]
+    declarations: [
+        AdminComponent, 
+        DashboardComponent, 
+        MenuLateralComponent,
+    ]
 })
 export class AdminModule { }

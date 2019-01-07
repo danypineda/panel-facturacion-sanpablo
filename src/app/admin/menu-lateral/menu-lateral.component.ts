@@ -18,10 +18,26 @@ export class MenuLateralComponent implements OnInit {
 
   appitems = [
     {
-      label: 'Dashboard',
-      icon: 'dashboard',
-      link: '/admin/dashboard'
+      label: 'Dashboard',//Texto a mostrar
+      icon: 'dashboard', //Icono  https://material.io/tools/icons/?style=baseline
+      link: '/admin/dashboard' // La ruta que va a mostrar
     },
+{
+  label: 'Clientes',
+  icon: 'person',
+  items: [
+    {
+      label: 'Agregar',
+      icon: 'person_add',
+      link: '/admin/clientes/agregar'
+    },
+    {
+      label: 'Listar',
+      icon: 'format_list_numbered',
+      link: '/admin/clientes/listar'
+    }
+  ]
+},
     {
       label: 'Menu 1',
       icon: 'school',

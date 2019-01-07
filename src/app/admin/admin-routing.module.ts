@@ -16,6 +16,11 @@ const routes: Routes = [
 		children: [
 			{ path: '', component: DashboardComponent }
 		]
+	},
+	{
+		path: 'clientes',
+		component: AdminComponent,
+		loadChildren: './clientes/clientes.module#ClientesModule'
 	}
 ];
 
