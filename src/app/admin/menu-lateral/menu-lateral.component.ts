@@ -18,8 +18,8 @@ export class MenuLateralComponent implements OnInit {
 
   appitems = [
     {
-      label: 'Dashboard',//Texto a mostrar
-      icon: 'dashboard', //Icono  https://material.io/tools/icons/?style=baseline
+      label: 'Inicio',//Texto a mostrar
+      icon: 'menu', //Icono  https://material.io/tools/icons/?style=baseline
       link: '/admin/dashboard' // La ruta que va a mostrar
     },
     {
@@ -42,7 +42,7 @@ export class MenuLateralComponent implements OnInit {
     },
     {
       label: 'Productos',
-      icon: 'person',
+      icon: 'card_giftcard',
       items: [
         {
           label: 'Agregar',
@@ -51,30 +51,30 @@ export class MenuLateralComponent implements OnInit {
         },
         {
           label: 'Listar',
-          icon: 'assignment',
+          icon: 'aformat_list_numbered',
           link: '/admin/productos/listar'
         }
       ]
     },
     {
       label: 'Ventas',
-      icon: 'person',
+      icon: 'attach_money',
       items: [
         {
           label: 'Agregar',
           icon: 'add_shopping_cart',
-          link: '/admin/productos/agregar'
+          link: '/admin/ventas/agregar'
         },
         {
           label: 'Listar',
-          icon: 'assignment',
-          link: '/admin/productos/listar'
+          icon: 'format_list_numbered',
+          link: '/admin/ventas/listar'
         }
       ]
     },
     {
       label: 'Usuarios',
-      icon: 'person',
+      icon: 'supervised_user_circle',
       items: [
         {
           label: 'Agregar',
@@ -83,14 +83,14 @@ export class MenuLateralComponent implements OnInit {
         },
         {
           label: 'Listar',
-          icon: 'assignment',
+          icon: 'format_list_numbered',
           link: '/admin/usuarios/listar'
         }
       ]
     },
     {
       label: 'Creditos',
-      icon: 'person',
+      icon: 'credit_card',
       items: [
         {
           label: 'Agregar',
@@ -103,10 +103,10 @@ export class MenuLateralComponent implements OnInit {
           link: '/admin/creditos/listar'
         }
       ]
-    },
+      },
     {
       label: 'Reportes',
-      icon: 'person',
+      icon: 'playlist_add_check',
       items: [
         {
           label: 'Agregar',
@@ -115,7 +115,7 @@ export class MenuLateralComponent implements OnInit {
         },
         {
           label: 'Listar',
-          icon: 'assignment',
+          icon: 'playlist_add_check',
           link: '/admin/reportes/listar'
         }
       ]
