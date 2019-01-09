@@ -22,59 +22,105 @@ export class MenuLateralComponent implements OnInit {
       icon: 'dashboard', //Icono  https://material.io/tools/icons/?style=baseline
       link: '/admin/dashboard' // La ruta que va a mostrar
     },
-{
-  label: 'Clientes',
-  icon: 'person',
-  items: [
     {
-      label: 'Agregar',
-      icon: 'person_add',
-      link: '/admin/clientes/agregar'
-    },
-    {
-      label: 'Listar',
-      icon: 'format_list_numbered',
-      link: '/admin/clientes/listar'
-    }
-  ]
-},
-    {
-      label: 'Menu 1',
-      icon: 'school',
+      label: 'Clientes',
+      icon: 'person',
       items: [
         {
           label: 'Agregar',
-          link: '/admin/escuelas',
-          icon: 'add_box'
+          icon: 'person_add',
+          link: '/admin/clientes/agregar'
         },
         {
           label: 'Listar',
-          link: '/admin/listar-escuelas',
-          icon: 'format_list_numbered'
+          icon: 'format_list_numbered',
+          link: '/admin/clientes/listar'
         },
+        
+
       ]
     },
     {
-      label: 'Menu 2',
-      icon: 'location_city',
+      label: 'Productos',
+      icon: 'person',
       items: [
         {
           label: 'Agregar',
-          link: '/admin/escuelas',
-          icon: 'add_box'
+          icon: 'add_shopping_cart',
+          link: '/admin/productos/agregar'
         },
         {
           label: 'Listar',
-          link: '/admin/listar-escuelas',
-          icon: 'format_list_numbered'
-        },
+          icon: 'assignment',
+          link: '/admin/productos/listar'
+        }
       ]
     },
     {
-      label: 'Cerrar Sesión',
-      icon: 'power_settings_new',
-      link: 'cerrarSesion'
+      label: 'Ventas',
+      icon: 'person',
+      items: [
+        {
+          label: 'Agregar',
+          icon: 'add_shopping_cart',
+          link: '/admin/productos/agregar'
+        },
+        {
+          label: 'Listar',
+          icon: 'assignment',
+          link: '/admin/productos/listar'
+        }
+      ]
     },
+    {
+      label: 'Usuarios',
+      icon: 'person',
+      items: [
+        {
+          label: 'Agregar',
+          icon: 'add_shopping_cart',
+          link: '/admin/usuarios/agregar'
+        },
+        {
+          label: 'Listar',
+          icon: 'assignment',
+          link: '/admin/usuarios/listar'
+        }
+      ]
+    },
+    {
+      label: 'Creditos',
+      icon: 'person',
+      items: [
+        {
+          label: 'Agregar',
+          icon: 'add_shopping_cart',
+          link: '/admin/creditos/agregar'
+        },
+        {
+          label: 'Listar',
+          icon: 'assignment',
+          link: '/admin/creditos/listar'
+        }
+      ]
+    },
+    {
+      label: 'Reportes',
+      icon: 'person',
+      items: [
+        {
+          label: 'Agregar',
+          icon: 'add_shopping_cart',
+          link: '/admin/reportes/agregar'
+        },
+        {
+          label: 'Listar',
+          icon: 'assignment',
+          link: '/admin/reportes/listar'
+        }
+      ]
+    },
+    
   ];
 
   constructor(
