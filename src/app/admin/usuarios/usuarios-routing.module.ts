@@ -1,10 +1,10 @@
 import { Routes, RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { UsuariosListarComponent } from './usuarios-listar/usuarios-listar.component';
 import { UsuariosAgregarComponent } from './usuarios-agregar/usuarios-agregar.component';
 import { UsuariosComponent } from './usuarios.component';
+import { NgModule } from '@angular/core';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
 		path: '',
 		redirectTo: 'listar',
@@ -30,6 +30,7 @@ const routes: Routes = [
 	imports: [
 		RouterModule.forChild(routes),
 	],
-	exports: [RouterModule]
+	exports: [RouterModule] 
 })
-export class ClientesRoutingModule { }
+export class UsuariosRoutingModule { }
+

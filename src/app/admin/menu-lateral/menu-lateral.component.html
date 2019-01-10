@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
-    <mat-toolbar color="primary"><img class="logo" src="https://placehold.it/70x35?text=LOGO" alt="Logo"></mat-toolbar>
+    <mat-toolbar color="primary"><img class="logo" src="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/14568121_1758922601039153_8111083828747351882_n.png?_nc_cat=104&_nc_ht=scontent-lga3-1.xx&oh=97eacfa3106ce04038c6ea9e9bd59460&oe=5CD4421C" alt="Logo"></mat-toolbar>
     
     <ng-material-multilevel-menu [configuration]='config' [items]='appitems' (selectedItem)="navegarMenu($event)"></ng-material-multilevel-menu>.
   </mat-sidenav>

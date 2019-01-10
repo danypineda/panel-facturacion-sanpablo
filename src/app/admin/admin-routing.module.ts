@@ -40,10 +40,10 @@ const routes: Routes = [
 	{
 		path: 'creditos',
 		component: AdminComponent,
-		loadChildren: './creditos/creditos.module#UsuariosModule'
+		loadChildren: './creditos/creditos.module#CreditosModule'
 	},
 	{
-		path: 'creditos',
+		path: 'reportes',
 		component: AdminComponent,
 		loadChildren: './reportes/reportes.module#ReportesModule'
 	},

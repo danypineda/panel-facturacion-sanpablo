@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'agregar',
-    component:      ReportesComponent,
+    component:ReportesComponent,
     children: [
       { path: '', component: ReportesAgregarComponent }
     ]
@@ -30,6 +30,6 @@ const routes: Routes = [
 	imports: [
 		RouterModule.forChild(routes),
 	],
-	exports: [RouterModule]
+	exports: [RouterModule] 
 })
-export class ClientesRoutingModule { }
+export class ReportesRoutingModule { }

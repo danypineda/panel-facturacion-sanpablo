@@ -18,12 +18,12 @@ const routes: Routes = [
   },
   {
     path: 'agregar',
-    component: ProductosComponent,
+    component:ProductosComponent,
     children: [
       { path: '', component: ProductosAgregarComponent }
     ]
   }
-];
+];      
 
 @NgModule({
 	imports: [

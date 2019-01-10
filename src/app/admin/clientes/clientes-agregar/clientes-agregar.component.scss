@@ -3,8 +3,15 @@ html {
     font-family: 'Lato', sans-serif;
 }
 
+.sidenav-container{
+    
+    margin:60px auto 45px;
+    background-color:rgb(175, 89, 63);
+    box-shadow:0 1px 1px #ccc;
+	border-radius:2px;
+}
 body {
-	background-color: #9AD1ED;
+	background-color:rgb(175, 89, 63);
 }
 
 .container {
@@ -20,7 +27,7 @@ body {
 	width: 100%;
 	text-align: center;
 	padding: 2rem 0 1rem;
-	border-top: solid .4rem #F39B53;
+	border-top: solid .4remrgb (175, 89, 63);
 	margin-bottom: 1rem;
 }
 
