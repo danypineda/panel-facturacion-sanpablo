@@ -40,6 +40,7 @@ import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
         MatSlideToggleModule,
         FormsModule,
         // NgBreadcrumbModule,
+        ReactiveFormsModule,
     ],
     declarations: [
         AdminComponent, 

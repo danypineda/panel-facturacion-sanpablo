@@ -1,22 +1,27 @@
 .grid-container {
-    margin: 20px;
-  }
+  margin: 0px;
+}
+
+
+
+.more-button {
+  position: absolute;
+  top: 100px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
+.mat-toolbar {
+  width: 0.0%;
+  display: block;
+  display: block;
+  margin:  auto  auto;
+  padding: 0px;
+  position: absolute;
+  top: 70px;
+  width:60px;
+  height:50px;
   
-  .dashboard-card {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-  }
-  
-  .more-button {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-  }
-  
-  .dashboard-card-content {
-    text-align: center;
-  }
-  
+}

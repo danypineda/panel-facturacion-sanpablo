@@ -4,11 +4,13 @@ import { ClientesComponent } from './clientes.component';
 import { ClientesRoutingModule } from './clientes-routing.module';
 import { ClientesListarComponent } from './clientes-listar/clientes-listar.component';
 import { ClientesAgregarComponent } from './clientes-agregar/clientes-agregar.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    ClientesRoutingModule
+    ClientesRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [ClientesComponent, ClientesListarComponent, ClientesAgregarComponent]
 })

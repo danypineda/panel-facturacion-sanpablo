@@ -16,6 +16,10 @@ export class MenuLateralComponent implements OnInit {
       map(result => result.matches)
     );
 
+    config = {
+      fontColor: "white"
+    }
+
   appitems = [
     {
       label: 'Inicio',//Texto a mostrar

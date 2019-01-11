@@ -1,107 +1,41 @@
 .sidenav-container {
     height: 100%;
   }
-  
-  .sidenav {
-    width: 250px;
-    box-shadow: 3px 0 6px rgba(0,0,0,.24);
-  }
-  
-  .active-link {
-    background-color: rgba(9, 245, 99, 0.292);
-  }
   .logo{
-    height: 3rem;
+    height: 3.6rem; //tamaño del logo
     margin: 0 auto;
+    border-radius: 50%;
   }
-  
-  .user-nombre{
-  font-size: .8rem;
-  font-weight: bolder;
-  }
-  
-  .perfil{
-    height: 90px;
-    width: 90px;
-  }
-  
-  .user-rol{
-    font-size: .6rem;
-    font-weight: bold;
-    color: #c32525;
-  }
-  
-  .sidenav{
-    font:15px/1.3 'Open Sans', sans-serif;
-    color: #5e5b64;
-    text-align:center;
-   }
-   
-  .sidenav-container{
-    outline:none;
-    color:white;
-   }
-   
-   .sidenav{
-    text-decoration:none;
-   }
-   
-   section, footer, header, aside, nav{
-    display: block;
-   }
-   
    /*-------------------------
     The menu
    --------------------------*/
    .sidenav-container{
-    
-    margin:60px auto 45px;
-    background-color:rgb(175, 89, 63);
-    box-shadow:0 1px 1px #ccc;
-    border-radius:2px;
+    // margin:60px auto 45px;
+    // background-color:rgb(190, 187, 186);
+    background-color: rgba(255,255,255,.5);
    }
    .mat-toolbar{
-    
-    margin:5px auto 45px;
-    background-color:rgb(175, 89, 63);
-    box-shadow:0 1px 1px #ccc;
-    border-radius:2px;
+    background-color:rgb(77, 65, 61); 
+    color: white !important;
    }
    .sidenav{
-    display:inline-block;
-    margin:60px auto 45px;
-    background-color:rgb(175, 89, 63);
-    box-shadow:0 1px 1px #ccc;
-    border-radius:2px;
+    // margin:60px auto 45px; //se mueve el menu hacia arriba
+    background-color:rgb(77, 65, 61);
+    span{
+      color: white !important;
+
+    }
+
+    
    }
-   
-   mat-i{
-    display:inline-block;
-    padding: 18px 30px;
-    color:#fff !important;
-    font-weight:bold;
-    font-size:12px;
-    text-decoration:none !important;
-    line-height:1;
-    text-transform: uppercase;
-    background-color:transparent;
-   
-   -webkit-transition:background-color 0.25s;
-    -moz-transition:background-color 0.25s;
-    transition:background-color 0.25s;
-   }
-   
-   nav a:first-child{
-    border-radius:2px 0 0 2px;
-   }
-   
-   nav a:last-child{
-    border-radius:0 2px 2px 0;
-   }
-   
    nav.home .home,
    nav.projects .projects,
    nav.services .services,
    nav.contact .contact{
     background-color:#e35885;
    }
+
+   ng-material-multilevel-menu{
+    color: white !important;
+    
+  }

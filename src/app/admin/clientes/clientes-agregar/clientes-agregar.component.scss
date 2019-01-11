@@ -1,17 +1,7 @@
-html {
-	font-size: 16px;
-    font-family: 'Lato', sans-serif;
-}
 
-.sidenav-container{
-    
-    margin:60px auto 45px;
-    background-color:rgb(175, 89, 63);
-    box-shadow:0 1px 1px #ccc;
-	border-radius:2px;
-}
+
 body {
-	background-color:rgb(175, 89, 63);
+	background-color:rgb(77, 65, 61);
 }
 
 .container {
@@ -31,15 +21,6 @@ body {
 	margin-bottom: 1rem;
 }
 
-.form__top h2 {
-	font-weight: bold;
-	color: #CAC8C8;
-	font-size: 18px;
-}
-
-h2 span {
-	color: #F39B53;
-}
 
 .form__reg {
 	padding: 0 2rem;
@@ -65,23 +46,4 @@ h2 span {
 
 .input:focus {
 	border-bottom: solid #F39B53 .2rem;
-}
-
-.btn__submit, .btn__reset {
-	width: 40%;
-	border-bottom: none;
-	background-color: #31B1E5;
-	color: white;
-}
-
-.btn__reset {
-	background-color: #EDA135;
-}
-
-.btn__submit:hover {
-	background-color: #4C9ED9;
-}
-
-.btn__reset:hover{
-	background-color: #FA9535;
 }
