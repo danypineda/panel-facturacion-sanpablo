@@ -47,6 +47,11 @@ const routes: Routes = [
 		component: AdminComponent,
 		loadChildren: './reportes/reportes.module#ReportesModule'
 	},
+	{
+		path: 'categorias',
+		component: AdminComponent,
+		loadChildren: './categorias/categorias.module#CategoriasModule'
+	},
 ];
 
 @NgModule({

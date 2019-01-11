@@ -1,9 +1,9 @@
 .sidenav-container {
-    height: 100%;
+    height: 1%;
   }
   .logo{
     height: 3.6rem; //tamaño del logo
-    margin: 0 auto;
+  
     border-radius: 50%;
   }
    /*-------------------------
@@ -12,8 +12,10 @@
    .sidenav-container{
     // margin:60px auto 45px;
     // background-color:rgb(190, 187, 186);
-    background-color: rgba(255,255,255,.5);
+    background-color: rgba(114, 75, 75, 0);
+    color: white !important;
    }
+   
    .mat-toolbar{
     background-color:rgb(77, 65, 61); 
     color: white !important;
@@ -39,3 +41,8 @@
     color: white !important;
     
   }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}

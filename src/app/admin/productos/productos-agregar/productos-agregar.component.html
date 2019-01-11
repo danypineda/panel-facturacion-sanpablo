@@ -1,43 +1,55 @@
-<div class="col-6">
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Producto</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" type="text" placeholder="ingrese el nombre del Producto">
-      <span class="help-block"></span>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Descripcion</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control round-input" type="text" placeholder="ingrese una descripcion del producto">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-2 control-label">Valor unitario</label>
-    <div class="col-sm-10">
-      <input class="form-control" id="focusedInput" type="text" value="Introdusca el valor del producto">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-2 control-label">cantidad</label>
-    <div class="col-sm-10">
-      <input class="form-control" id="disabledInput" type="text" placeholder="seleccione la cantidad">
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-2 control-label">categoria</label>
-    <select name="lenguajes_programacion">
-        <option value="C01">SALA</option>
-        <option value="C02">COMEDOR</option>
-        <option value="C03">DORMITORIOS</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-2 control-label"></label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="">
-    </div>
-  </div>
+<div class="">
+	<div class="form__top">
+    <h2  align="center">REGISTRO DE PRODUCTOS</h2>
+	</div>
+		<div class="row">
+			<div class="col-6">
+				<div>
+					<div class="col-sm-4">
+						<label class="col-sm-2 control-label">ID:</label>
+						<input class="form-control" formControlName="identificacion" id="RUC" type="text" placeholder=" Codigo">
+					</div>
+				</div>
+				<div>
+					<div class="col-sm-8">
+						<label class="col-sm-2 control-label">Nombre:</label>
+						<input class="form-control" formControlName="identificacion" id="RUC" type="text" placeholder="Nombre Producto">
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<label class="col-sm-2 control-label">Cantidad:</label>
+					<input type="text" class="form-control" formControlName="nombres" id="Nombres" type="number" placeholder="Cantidad">
+					<span class="help-block"></span>
+				</div>
+				<div>
+					<div class="col-sm-8">
+						<label class="col-sm-2 control-label">Apellidos:</label>
+						<input type="text" class="form-control  round-input" formControlName="apellidos" type="text" placeholder="Apellidos completos">
+					</div>
+				</div>
+				<div class="col-sm-8">
+					<label class="col-sm-2 control-label"> Telefono:</label>
+					<input type="text" class="form-control" id="Telefono" type="tel" formControlName="telefono" placeholder="Telefono fijo o movil">
+				</div>
+			</div>
+			<div class="col-6">
+				<div>
+					<div class="col-sm-8">
+						<label class="col-sm-2 control-label">Descripcion:</label>
+						<textarea id="Direccion" class="form-control" formControlName="direccion" type="textarea" rows="4" cols="35"
+             placeholder="Descripcion Producto"></textarea>
+					</div>
+				</div>
+				<div>
+					<div class="col-sm-8">
+						<label class="col-sm-2 control-label">Email:</label>
+						<input class="form-control" id="email" type="email" formControlName="email" placeholder="Correo personal">
+					</div>
+					<div class="col-sm-8">
+						<label class="col-sm-2 control-label"> Ciudad:</label>
+						<input type="text" class="form-control" id="Telefono" type="tel" formControlName="telefono" placeholder="Ciudad">
+					</div>
+				</div>
+			</div>
+		</div>
 </div>
-
-

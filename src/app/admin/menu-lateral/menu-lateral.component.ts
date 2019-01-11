@@ -32,7 +32,7 @@ export class MenuLateralComponent implements OnInit {
       items: [
         {
           label: 'Agregar',
-          icon: 'person_add',
+          icon: 'add',
           link: '/admin/clientes/agregar'
         },
         {
@@ -49,12 +49,12 @@ export class MenuLateralComponent implements OnInit {
       icon: 'card_giftcard',
       items: [
         {
-          label: 'Agregar',
+          label: 'Nuevo',
           icon: 'add_shopping_cart',
           link: '/admin/productos/agregar'
         },
         {
-          label: 'Listar',
+          label: 'Existencia  ',
           icon: 'aformat_list_numbered',
           link: '/admin/productos/listar'
         }
@@ -66,7 +66,7 @@ export class MenuLateralComponent implements OnInit {
       items: [
         {
           label: 'Agregar',
-          icon: 'add_shopping_cart',
+          icon: 'attach_money',
           link: '/admin/ventas/agregar'
         },
         {
@@ -82,7 +82,7 @@ export class MenuLateralComponent implements OnInit {
       items: [
         {
           label: 'Agregar',
-          icon: 'add_shopping_cart',
+          icon: 'add_circle_outline',
           link: '/admin/usuarios/agregar'
         },
         {
@@ -98,7 +98,7 @@ export class MenuLateralComponent implements OnInit {
       items: [
         {
           label: 'Agregar',
-          icon: 'add_shopping_cart',
+          icon: 'monetization_on',
           link: '/admin/creditos/agregar'
         },
         {
@@ -110,17 +110,33 @@ export class MenuLateralComponent implements OnInit {
       },
     {
       label: 'Reportes',
-      icon: 'playlist_add_check',
+      icon: 'notes',
       items: [
         {
-          label: 'Agregar',
-          icon: 'add_shopping_cart',
+          label: 'Consultar',//generar un reporte
+          icon: 'zoom_in',
           link: '/admin/reportes/agregar'
         },
         {
           label: 'Listar',
           icon: 'playlist_add_check',
           link: '/admin/reportes/listar'
+        }
+      ]
+    },
+    {
+      label: 'Categorias',
+      icon: 'playlist_add',
+      items: [
+        {
+          label: 'Agregar',
+          icon: 'plus_one',
+          link: '/admin/categorias/agregar'
+        },
+        {
+          label: 'Listar',
+          icon: 'playlist_add_check',
+          link: '/admin/categorias/listar'
         }
       ]
     },
