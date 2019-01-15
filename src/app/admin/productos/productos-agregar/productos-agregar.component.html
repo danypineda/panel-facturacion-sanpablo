@@ -1,55 +1,82 @@
-<div class="">
+<div class="col-lg-12">
 	<div class="form__top">
-    <h2  align="center">REGISTRO DE PRODUCTOS</h2>
+		<h2>ADMINISTRACION <span>PRODUCTOS</span></h2>
+		<form [formGroup]="productosForm">
+
+			<input class="form-control round-input col-sm-11 input" formControlName="codigo" type="text" placeholder="&#128100;  Codigo"
+			 required autofocus>
+			<input class="form-control round-input col-sm-11 input" formControlName="categoria" type="text" placeholder="&#128100;  Categoria"
+			 required autofocus>
+			<input class="form-control round-input col-sm-11 input" formControlName="nombre" type="email" placeholder="&#128100;  Nombre"
+			 required>
+			<input class="form-control round-input col-sm-11 input" formControlName="detalle" type="text" placeholder="&#128100;  Detalle"
+			 required>
+			<input class="form-control round-input col-sm-11 input" formControlName="precio" type="text" placeholder="&#128100;  Precio"
+			 required>
+			<input class="form-control round-input col-sm-11 input" formControlName="stock" type="text" placeholder="&#128100;  Stock"
+			 required>
+			<div class="btn__form">
+				<input class="btn__submit" type="submit" value="REGISTRAR">
+				<input class="btn__reset" type="reset" value="LIMPIAR">
+			</div>
+		</form>
+		<pre>{{productosForm.value | json }}</pre>
 	</div>
-		<div class="row">
-			<div class="col-6">
-				<div>
-					<div class="col-sm-4">
-						<label class="col-sm-2 control-label">ID:</label>
-						<input class="form-control" formControlName="identificacion" id="RUC" type="text" placeholder=" Codigo">
-					</div>
-				</div>
-				<div>
-					<div class="col-sm-8">
-						<label class="col-sm-2 control-label">Nombre:</label>
-						<input class="form-control" formControlName="identificacion" id="RUC" type="text" placeholder="Nombre Producto">
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<label class="col-sm-2 control-label">Cantidad:</label>
-					<input type="text" class="form-control" formControlName="nombres" id="Nombres" type="number" placeholder="Cantidad">
-					<span class="help-block"></span>
-				</div>
-				<div>
-					<div class="col-sm-8">
-						<label class="col-sm-2 control-label">Apellidos:</label>
-						<input type="text" class="form-control  round-input" formControlName="apellidos" type="text" placeholder="Apellidos completos">
-					</div>
-				</div>
-				<div class="col-sm-8">
-					<label class="col-sm-2 control-label"> Telefono:</label>
-					<input type="text" class="form-control" id="Telefono" type="tel" formControlName="telefono" placeholder="Telefono fijo o movil">
-				</div>
-			</div>
-			<div class="col-6">
-				<div>
-					<div class="col-sm-8">
-						<label class="col-sm-2 control-label">Descripcion:</label>
-						<textarea id="Direccion" class="form-control" formControlName="direccion" type="textarea" rows="4" cols="35"
-             placeholder="Descripcion Producto"></textarea>
-					</div>
-				</div>
-				<div>
-					<div class="col-sm-8">
-						<label class="col-sm-2 control-label">Email:</label>
-						<input class="form-control" id="email" type="email" formControlName="email" placeholder="Correo personal">
-					</div>
-					<div class="col-sm-8">
-						<label class="col-sm-2 control-label"> Ciudad:</label>
-						<input type="text" class="form-control" id="Telefono" type="tel" formControlName="telefono" placeholder="Ciudad">
-					</div>
-				</div>
-			</div>
+
+</div>
+<div class="btn__form">
+	<div class="col-lg-12">
+		<div class="form__top"></div>
+
+		<div>
+			<header class="panel-heading">
+				Lista Productos:
+			</header>
 		</div>
+		<section class="panel">
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>CODIGO</th>
+						<th>CATEGORIA</th>
+						<th>NOMBRE</th>
+						<th>DETALLE</th>
+						<th>PRECIO</th>
+						<th>STOCK</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</div>
 </div>

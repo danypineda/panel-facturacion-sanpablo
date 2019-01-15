@@ -1,6 +1,9 @@
-body {
-	background-color:rgb(77, 65, 61);
+html {
+	font-size: 16px;
+    font-family: 'Lato', sans-serif;
 }
+
+
 
 .container {
 	max-width: 450px;
@@ -15,10 +18,19 @@ body {
 	width: 100%;
 	text-align: center;
 	padding: 2rem 0 1rem;
-	border-top: solid .4remrgb (175, 89, 63);
+	border-top: solid .4rem #e30713;
 	margin-bottom: 1rem;
 }
 
+.form__top h2 {
+	font-weight: bold;
+	color: #CAC8C8;
+	font-size: 18px;
+}
+
+h2 span {
+	color: #F39B53;
+}
 
 .form__reg {
 	padding: 0 2rem;
@@ -45,6 +57,24 @@ body {
 .input:focus {
 	border-bottom: solid #F39B53 .2rem;
 }
-.form-control{
-    background: #bebebe !important;
-  }
+
+.btn__submit, .btn__reset {
+	width: 20%;
+	border-bottom: none;
+	background-color: #31B1E5;
+	color: white;
+}
+
+.btn__reset {
+	background-color: #EDA135;
+}
+.btn__submit:hover {
+	background-color: #4C9ED9;
+}
+
+.btn__reset:hover{
+	background-color: #FA9535;
+}
+
+
+

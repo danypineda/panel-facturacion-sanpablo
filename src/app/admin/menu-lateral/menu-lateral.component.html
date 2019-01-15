@@ -1,17 +1,41 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
-    <mat-toolbar><img class="logo" src="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/14568121_1758922601039153_8111083828747351882_n.png?_nc_cat=104&_nc_ht=scontent-lga3-1.xx&oh=97eacfa3106ce04038c6ea9e9bd59460&oe=5CD4421C" alt="Logo"></mat-toolbar>
-    
+    <mat-toolbar><img class="logo" src="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/14568121_1758922601039153_8111083828747351882_n.png?_nc_cat=104&_nc_ht=scontent-lga3-1.xx&oh=97eacfa3106ce04038c6ea9e9bd59460&oe=5CD4421C"
+        width="85" alt="Logo"></mat-toolbar>
+
     <ng-material-multilevel-menu [configuration]='config' [items]='appitems' (selectedItem)="navegarMenu($event)"></ng-material-multilevel-menu>.
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button type="button"  mat-icon-button (click)="drawer.toggle()">
+      <button type="button" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>SISTEMA FACTURACION SAN PABLO</span>
+      <ul class="nav pull-right top-menu">
+        <h2>SISTEMA DE FACTURACION <span>SAN PABLO_____________________________________________</span></h2>
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+          <span class="profile-ava">
+            <img alt="" src="http://assets.diarioregistrado.com/legacy/news/diarioregistrado/551b193d6c06f.jpg" width="40">
+          </span>
+          <span class="username">Administrador</span>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu extended logout">
+          <div class="log-arrow-up"></div>
+          <li class="eborder-top">
+            <a href="#"><i class="icon_profile"></i> My Profile</a>
+          </li>
+          <li>
+            <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
+          </li>
+          <li>
+            <a href="login.html"><i class="icon_key_alt"></i>Cerrar sesión</a>
+          </li>
+        </ul>
+      </ul>
+
     </mat-toolbar>
+
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

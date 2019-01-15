@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -24,7 +24,5 @@ export class ClientesAgregarComponent implements OnInit {
       direccion: ["", Validators.compose([Validators.minLength(5), Validators.required])],
       email: ["", Validators.compose([Validators.email, Validators.required])],
     });
-
   }
-
 }

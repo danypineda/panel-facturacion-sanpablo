@@ -108,24 +108,9 @@ export class MenuLateralComponent implements OnInit {
         }
       ]
       },
+  
     {
-      label: 'Reportes',
-      icon: 'notes',
-      items: [
-        {
-          label: 'Consultar',//generar un reporte
-          icon: 'zoom_in',
-          link: '/admin/reportes/agregar'
-        },
-        {
-          label: 'Listar',
-          icon: 'playlist_add_check',
-          link: '/admin/reportes/listar'
-        }
-      ]
-    },
-    {
-      label: 'Categorias',
+      label: 'Configuración',
       icon: 'playlist_add',
       items: [
         {
@@ -133,11 +118,6 @@ export class MenuLateralComponent implements OnInit {
           icon: 'plus_one',
           link: '/admin/categorias/agregar'
         },
-        {
-          label: 'Listar',
-          icon: 'playlist_add_check',
-          link: '/admin/categorias/listar'
-        }
       ]
     },
     

@@ -1,3 +1,173 @@
-<p>
-  creditos-listar works!
-</p>
+<div class="col-lg-12">
+
+  <div class="form__top">
+    <h2>ADMINISTRACION <span>CREDITOS</span></h2>
+  </div>
+</div>
+<div class="col-lg-12">
+
+  <header class=" panel-heading form-control input">
+    BUSCAR CLIENTES:
+  </header>
+  <div class="col-lg-12">
+    <div class="form-panel">
+      <form class="form-inline" role="form">
+        <div class="form-group">
+          <input class="form-control round-form" placeholder="Cédula / RUC" autocomplete>
+        </div>
+        <button type="submit" class=" btn-primary">
+          <i class="fa fa-dot-circle-o"></i> Agregar
+        </button>
+      </form>
+    </div>
+    <section class="panel">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>NOMBRES</th>
+            <th>APELLIDOS</th>
+            <th>CÉDULA</th>
+            <th>TELÉFONO</th>
+            <th>DIRECCIÓN</th>
+            <th>CORREO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Johana Patricia</td>
+            <td>Cordova Rivas</td>
+            <td>0703878678</td>
+            <td>0989696271</td>
+            <td>Paris y Pragras</td>
+            <td>jerewat07@gmail.com</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Felix Geovanny</td>
+            <td>Vicente Illescas</td>
+            <td>1900813633</td>
+            <td>0994939111</td>
+            <td>Eguigure y Rengel</td>
+            <td>felixviche@gmail.com</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  <header class=" panel-heading form-control input">
+    TABLA DE AMORTIZACIÓN:
+  </header>
+  <div class="col-lg-12">
+    <section class="panel">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nº de Cuota</th>
+            <th>Saldo</th>
+            <th>Fecha de Pago</th>
+            <th>Monto</th>
+            <th>Interes Mensual</th>
+            <th>Estado</th>
+            <th>Saldo Restante</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  <header class=" panel-heading form-control input">
+    DETALLE RECIBO:
+  </header>
+
+
+  <div class="card-body card-block form-inline">
+    <div class="form-group">
+      Nº recibo:<input class="form-control round-input col-sm-11 input" type="text" placeholder="0000816" disabled>
+    </div>
+    <div class="form-group">
+      Fecha:<input class="form-control round-input col-sm-11 input" type="text" placeholder="Dia / Mes / Año" required>
+    </div>
+  </div>
+  <div class="form-group">
+    Recibí de:<input class="form-control round-input col-sm-8 input" type="text" required>
+  </div>
+  <div class="form-group">
+    Por concepto de:<input class="form-control round-input col-sm-8 input" type="text" required>
+  </div>
+  <div class="form-group">
+    La cantidad de:<input class="form-control round-input col-sm-3 input" type="text" placeholder="                                                dolares"
+      required>
+  </div>
+
+  <div class="card-body card-block form-inline">
+    <div class="col-2">
+      <ul class="nav top-menu pr-1">
+        <form class="navbar-form  ">
+          TOTAL: <input class="form-control round-input " required>
+        </form>
+      </ul>
+    </div>
+    <div class="col-2">
+      <ul class="nav top-menu pr-1">
+        <form class="navbar-form">
+          ABONO: <input class="form-control round-input" required>
+        </form>
+      </ul>
+    </div>
+    <div class="col-2">
+      <ul class="nav top-menu pr-1">
+        <form class="navbar-form">
+          SALDO:<input class="form-control round-input " required>
+        </form>
+
+      </ul>
+    </div>
+    <div class="col-1">
+      <ul class="nav top-menu pr-1">
+        <form class="navbar-form">
+          Nº CUOTA:<input class="form-control round-input " required>
+        </form>
+      </ul>
+    </div>
+  </div>
+  <div class="btn__form">
+    <input class="btn__submit" type="submit" value="REGISTRAR">
+    <input class="btn__reset" type="reset" value="IMPRIMIR">
+  </div>
+</div>
