@@ -4,26 +4,39 @@
 		<div class="form__top">
 			<h2>ADMINISTRACION <span>USUARIOS</span></h2>
 		</div>
-		<form class="form__reg" action="">
-			<input class="form-control round-input col-sm-12 input" type="text" placeholder="&#128100;  Nombres" required autofocus>
-			<input class="form-control round-input col-sm-12 input" type="text" placeholder="&#128100;  Apellidos" required autofocus>
-			<input class="form-control round-input col-sm-12 input" type="email" placeholder="&#128100;  Cedula/Ruc" required>
-			<input class="form-control round-input col-sm-12 input" type="text" placeholder="&#128100;  Email" required>
-			<input class="form-control round-input col-sm-12 input" type="text" placeholder="&#128100;  Telefono" required>
-			<input class="form-control round-input col-sm-12 input" type="text" placeholder="&#128100;  Dirección" required>
-			<input class="form-control round-input col-sm-12 input" type="text" placeholder="&#128100;  Rol" required>
-			<input class="form-control round-input col-sm-12 input" type="text" placeholder="&#128100;  Usuario" required>
-			<input class="form-control round-input col-sm-12 input" type="text" placeholder="&#128100;  Contraseña" required>
+		<form [formGroup]="usuariosForm">
+			<input class="form-control round-input col-sm-12 input" formControlName="nombres" type="text" placeholder="&#128100;  Nombres"
+			 required autofocus>
+			<input class="form-control round-input col-sm-12 input" formControlName="apellidos" type="text" placeholder="&#128100;  Apellidos"
+			 required autofocus>
+			<input class="form-control round-input col-sm-12 input" formControlName="cedula" type="text" placeholder="&#128100;  Cédula"
+			 required>
+			<input class="form-control round-input col-sm-12 input" formControlName="email" type="email" placeholder="&#128100;  Email"
+			 required>
+			<input class="form-control round-input col-sm-12 input" formControlName="telefono" type="text" placeholder="&#128100;  Teléfono"
+			 required>
+			<input class="form-control round-input col-sm-12 input" formControlName="direccion" type="text" placeholder="&#128100;  Dirección"
+			 required>
+			<input class="form-control round-input col-sm-12 input" formControlName="usuario" type="text" placeholder="&#128100;  Usuario"
+			 required>
+			<input class="form-control round-input col-sm-12 input" formControlName="contrasena" type="text" placeholder="&#128100;  Contraseña"
+			 required>
+			 	<div class="form-control col-sm-4 form-group input">
+					<span> ROL</span>
+					<input class=" round-input col-sm-1" type="radio" forControlName="optionsRadios" checked> Administrador
+					<input class=" round-input col-sm-1" type="radio" formControlName="optionsRadios" checked> Empleado	
+				</div>
 			<div class="btn__form">
 				<input class="btn__submit" type="submit" value="REGISTRAR">
 				<input class="btn__reset" type="reset" value="LIMPIAR">
 			</div>
 		</form>
+		<pre>{{usuariosForm.value | json }}</pre>
 	</div>
 </div>
 <div class="btn__form">
 	<div class="col-lg-12">
-			<div class="form__top"></div>
+		<div class="form__top"></div>
 		<div>
 			<header class="panel-heading">
 				LISTA USUARIOS:
@@ -58,7 +71,7 @@
 						<th>jhonasanjose</th>
 					</tr>
 					<tr>
-					    <td>2</td>
+						<td>2</td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -66,7 +79,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td></td>		
+						<td></td>
 					</tr>
 					<tr>
 						<td>3</td>
@@ -77,7 +90,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td></td>		
+						<td></td>
 					</tr>
 				</tbody>
 			</table>

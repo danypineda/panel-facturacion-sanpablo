@@ -1,8 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
 import { ProductosComponent } from './productos.component';
 import { ProductosListarComponent } from './productos-listar/productos-listar.component';
 import { ProductosAgregarComponent } from './productos-agregar/productos-agregar.component';
+import { NgModule } from '@angular/core';
 const routes: Routes = [
   {
 		path: '',

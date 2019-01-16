@@ -43,14 +43,9 @@ const routes: Routes = [
 		loadChildren: './creditos/creditos.module#CreditosModule'
 	},
 	{
-		path: 'reportes',
+		path: 'informacion',
 		component: AdminComponent,
-		loadChildren: './reportes/reportes.module#ReportesModule'
-	},
-	{
-		path: 'categorias',
-		component: AdminComponent,
-		loadChildren: './categorias/categorias.module#CategoriasModule'
+		loadChildren: './informacion/informacion.module#InformacionModule'
 	},
 ];
 

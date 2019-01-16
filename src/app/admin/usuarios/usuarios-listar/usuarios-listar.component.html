@@ -1,16 +1,17 @@
 <div class="col-lg-12">
+
   <div class="form__top">
     <h2>REPORTES <span>USUARIOS</span></h2>
   </div>
 
 </div>
-<div class="btn__form">
+
   <div class="col-lg-12">
     <div class="form__top"></div>
     <ul class="nav top-menu">
     
-      <form class="navbar-form">
-        Buscar Usuario:<input class="form-control round-input input" placeholder="Cédula/Nombre" type="text" required>
+      <form [formGroup]="tmp" class="navbar-form">
+        Buscar Usuario:<input formControlName="busqueda" class="form-control round-input input" placeholder="Cédula/Nombre" type="text" required>
       </form>
      
     </ul>
@@ -69,4 +70,3 @@
       </table>
     </section>
   </div>
-</div>

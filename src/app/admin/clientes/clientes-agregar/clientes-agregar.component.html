@@ -1,77 +1,82 @@
 <div class="col-lg-12">
-		<div class="form__top">
-			<h2>ADMINISTRACION <span>CLIENTES</span></h2>
-			<form [formGroup]="clientesForm">
+	<div class="form__top">
+		<h2>ADMINISTRACION <span>CLIENTES</span></h2>
+		<form [formGroup]="clientesForm">
 
-				<input class="form-control round-input col-sm-11 input" formControlName="nombres" type="text" placeholder="&#128100;  Nombres" required autofocus>
-				<input class="form-control round-input col-sm-11 input " formControlName="apellidos" type="text" placeholder="&#128100;  Apellidos" required autofocus>
-				<input class="form-control round-input col-sm-11 input" formControlName="identificacion" type="email" placeholder="&#128100;  Cedula/Ruc" required>
-				<input class="form-control round-input col-sm-11 input"  formControlName="email" type="text" placeholder="&#128100;  Email" required>
-				<input class="form-control round-input col-sm-11 input" formControlName="telefono" type="text" placeholder="&#128100;  Telefono" required>
-				<input class="form-control round-input col-sm-11 input" formControlName="direccion" type="text" placeholder="&#128100;  Dirección" required>
-				<div class="btn__form">
-					<input class="btn__submit" type="submit" value="REGISTRAR">
-					<input class="btn__reset" type="reset" value="LIMPIAR">
-				</div>
-			</form>
-			<pre>{{clientesForm.value | json }}</pre> 
-		</div>
-		
-	</div>
-	<div class="btn__form">
-		<div class="col-lg-12">
-				<div class="form__top"></div>
-
-			<div>
-				<header class="panel-heading">
-					Lista Clientes:
-				</header>
+			<input class="form-control round-input col-sm-11 input" formControlName="nombres" type="text" placeholder="&#128100;  Nombres"
+			 required autofocus>
+			<input class="form-control round-input col-sm-11 input " formControlName="apellidos" type="text" placeholder="&#128100;  Apellidos"
+			 required autofocus>
+			<input class="form-control round-input col-sm-11 input" formControlName="identificacion" type="email" placeholder="&#128100;  Cédula/Ruc"
+			 required>
+			<input class="form-control round-input col-sm-11 input" formControlName="email" type="text" placeholder="&#128100;  Email"
+			 required>
+			<input class="form-control round-input col-sm-11 input" formControlName="telefono" type="text" placeholder="&#128100;  Teléfono"
+			 required>
+			<input class="form-control round-input col-sm-11 input" formControlName="direccion" type="text" placeholder="&#128100;  Dirección"
+			 required>
+			<div class="btn__form">
+				<input class="btn__submit" type="submit" value="REGISTRAR">
+				<input class="btn__reset" type="reset" value="LIMPIAR">
 			</div>
-			<section class="panel">
-
-				<table class="table">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Nombres</th>
-							<th>APELLIDOS</th>
-							<th>CÉDULA</th>
-							<th>TELÉFONO</th>
-							<th>DIRECCIÓN</th>
-							<th>CORREO</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>Johana Patricia</td>
-							<td>Cordova Rivas</td>
-							<td>0703878678</td>
-							<td>0989696271</td>
-							<td>Paris y Pragras</td>
-							<td>jerewat07@gmail.com</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Felix Geovanny</td>
-							<td>Vicente Illescas</td>
-							<td>1900813633</td>
-							<td>0994939111</td>
-							<td>Eguigure y Rengel</td>
-							<td>felixviche@gmail.com</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
-		</div>
+		</form>
+		<pre>{{clientesForm.value | json }}</pre>
 	</div>
-	
+
+</div>
+<div class="btn__form">
+	<div class="col-lg-12">
+		<div class="form__top"></div>
+
+		<div>
+			<header class="panel-heading">
+				Lista Clientes:
+			</header>
+		</div>
+		<section class="panel">
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nombres</th>
+						<th>APELLIDOS</th>
+						<th>CÉDULA</th>
+						<th>TELÉFONO</th>
+						<th>DIRECCIÓN</th>
+						<th>CORREO</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>Johana Patricia</td>
+						<td>Cordova Rivas</td>
+						<td>0703878678</td>
+						<td>0989696271</td>
+						<td>Paris y Pragras</td>
+						<td>jerewat07@gmail.com</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Felix Geovanny</td>
+						<td>Vicente Illescas</td>
+						<td>1900813633</td>
+						<td>0994939111</td>
+						<td>Eguigure y Rengel</td>
+						<td>felixviche@gmail.com</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</div>
+</div>

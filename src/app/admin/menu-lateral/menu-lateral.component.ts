@@ -108,19 +108,18 @@ export class MenuLateralComponent implements OnInit {
         }
       ]
       },
-  
-    {
-      label: 'Configuración',
-      icon: 'playlist_add',
-      items: [
-        {
-          label: 'Agregar',
-          icon: 'plus_one',
-          link: '/admin/categorias/agregar'
+      {
+        label: 'Información',
+        icon: 'credit_card',
+        items: [
+          {
+            label: 'Agregar',
+            icon: 'monetization_on',
+            link: '/admin/informacion/agregar'
+          },
+        ]
         },
-      ]
-    },
-    
+ 
   ];
 
   constructor(

@@ -6,8 +6,8 @@
 	</div>
 	<div class="col-lg-12">
 		<ul class="nav top-menu">
-			<form class="navbar-form">
-				Buscar Producto: <input class="form-control round-input input" placeholder="Codigo/Nombre" type="text" required>
+			<form [formGroup]="tmp" class="navbar-form">
+				Buscar Producto: <input formControlName="busqueda" class="form-control round-input input" placeholder="Codigo/Nombre" type="text" required>
 			</form>
 		</ul>LISTA-->
 		<section class="panel">
@@ -24,34 +24,34 @@
 						<th>STOCK</th>
 					</tr>
 				</thead>
-				
-					<tr>
-						<td>1</td>
-						<td>Johana Patricia</td>
-						<td>Cordova Rivas</td>
-						<td>0703878678</td>
-						<td>0989696271</td>
-						<td>Paris y Pragras</td>
-						<td>jerewat07@gmail.com</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Felix Geovanny</td>
-						<td>Vicente Illescas</td>
-						<td>1900813633</td>
-						<td>0994939111</td>
-						<td>Eguigure y Rengel</td>
-						<td>felixviche@gmail.com</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+
+				<tr>
+					<td>1</td>
+					<td>Johana Patricia</td>
+					<td>Cordova Rivas</td>
+					<td>0703878678</td>
+					<td>0989696271</td>
+					<td>Paris y Pragras</td>
+					<td>jerewat07@gmail.com</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>Felix Geovanny</td>
+					<td>Vicente Illescas</td>
+					<td>1900813633</td>
+					<td>0994939111</td>
+					<td>Eguigure y Rengel</td>
+					<td>felixviche@gmail.com</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
 			</table>
 		</section>
 	</div>

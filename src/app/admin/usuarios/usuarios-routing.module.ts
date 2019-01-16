@@ -1,10 +1,10 @@
 import { Routes, RouterModule } from '@angular/router';
+import { UsuariosComponent } from './usuarios.component';
 import { UsuariosListarComponent } from './usuarios-listar/usuarios-listar.component';
 import { UsuariosAgregarComponent } from './usuarios-agregar/usuarios-agregar.component';
-import { UsuariosComponent } from './usuarios.component';
 import { NgModule } from '@angular/core';
 
-export const routes: Routes = [
+ const routes: Routes = [
   {
 		path: '',
 		redirectTo: 'listar',
