@@ -7,5 +7,5 @@ export const environment = {
   production: false
 };
 
-export const API_URL = "http://localhost:3000"
+export const API_URL = "http://206.189.215.246:4050"
 export const TOKEN_KEY = "sanpablo_token"
