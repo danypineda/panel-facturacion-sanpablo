@@ -1,8 +1,25 @@
-<form class="form-signin">
-    <h2>Login</h2>
-    <label for="username" class="sr-only">Username</label>
-    <input type="text" required autofocus id="username" #username placeholder="Username/Email" />
-    <label for="password" class="sr-only">Password</label>
-    <input type="password" class="form-control" required autofocus id="password" #password placeholder="Password" />
-    <button type="button" (click)="login(username.value, password.value)">Login</button>
-</form>
+<div class="container">
+
+    <form class="login-form" [formGroup]="loginForm">
+        <div class="login-wrap">
+            <p class="login-img"><i class="">
+                    <span class="profile-ava">
+                        <img alt="" src="assets/img/LogoSanJose.png" width="100">
+                    </span>
+                </i></p>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_profile"></i></span>
+                <input type="text" class="form-control"placeholder="Usuario" formControlName="usuario" autofocus>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+                <input type="password" class="form-control" placeholder="Contraseña" formControlName="password">
+            </div>
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me"> Recordarme
+                <span class="pull-right"> <a href="#"> Olvide mi contraseña?</a></span>
+            </label>
+            <button class="btn btn-primary btn-lg btn-block round-input" [disabled]="loginForm.invalid" (click)="login(loginForm.getRawValue())">Iniciar Sesión</button>
+        </div>
+    </form>
+</div>

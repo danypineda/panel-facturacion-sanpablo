@@ -5,12 +5,16 @@ import { ProductosAgregarComponent } from './productos-agregar/productos-agregar
 import { ProductosListarComponent } from './productos-listar/productos-listar.component';
 import { ProductosRoutingModule } from './productos-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertModule } from 'ngx-alerts';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   imports: [
     CommonModule,
     ProductosRoutingModule,
-    ReactiveFormsModule
+    AlertModule.forRoot({ maxMessages: 5, timeout: 5000 }),
+    ReactiveFormsModule,
+    NgxDatatableModule,
   ],
   declarations: [ProductosComponent, ProductosAgregarComponent, ProductosListarComponent]
 })

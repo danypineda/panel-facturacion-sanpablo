@@ -13,26 +13,17 @@
       </button>
       <ul class="nav pull-right top-menu">
         <h2>SISTEMA DE FACTURACION <span>SAN PABLO_______________________________________________</span></h2>
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
           <span class="profile-ava">
             <img alt="" src="http://assets.diarioregistrado.com/legacy/news/diarioregistrado/551b193d6c06f.jpg" width="40">
           </span>
-          <span class="username">Administrador</span>
-          <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu extended logout">
-          <div class="log-arrow-up"></div>
-          <li class="eborder-top">
-            <a href="#"><i class="icon_profile"></i> My Profile</a>
-          </li>
-          <li>
-            <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
-          </li>
-          <li>
-            <a href="login.html"><i class="icon_key_alt"></i>Cerrar sesión</a>
-          </li>
-        </ul>
+          <button class="username" mat-button [matMenuTriggerFor]="menu">{{usuario.usuario}}<mat-icon>more_vert</mat-icon></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item><i class="icon_profile"></i> Mi Perfil</button>
+            <button mat-menu-item><i class="icon_key_alt"></i>Cerrar sesión</button>
+          </mat-menu>
       </ul>
+
+
 
     </mat-toolbar>
 

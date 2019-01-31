@@ -9,7 +9,8 @@ export class AuthGuardService {
 
     canActivate(): boolean | Promise<boolean> {
         let token = this.authentication.getToken();
-        let accessToken = this.authentication.getAccessToken();
+        console.log("TOken", token);
+
 
         if (!token) {
             console.error("User is not authenticated.");
@@ -18,14 +19,14 @@ export class AuthGuardService {
         }
         else if (this.authentication.isAuthenticated()) {
             return true;
-        }
-        else {
-            this.authentication.refreshToken();
-            return true;
+        } else {
+            this.redirectToLoginPage();
+            return false;
         }
     }
 
     redirectToLoginPage() {
+        localStorage.clear();
         this.router.navigate(['/login']);
     }
 

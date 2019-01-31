@@ -6,67 +6,27 @@
 
 </div>
 
-  <div class="col-lg-12">
-    <div class="form__top"></div>
-    <ul class="nav top-menu">
-    
-      <form [formGroup]="tmp" class="navbar-form">
-        Buscar Usuario:<input formControlName="busqueda" class="form-control round-input input" placeholder="Cédula/Nombre" type="text" required>
-      </form>
-     
-    </ul>
-    LISTA-->
-    <section class="panel">
+<div class="col-lg-12">
+  <div class="form__top"></div>
+  <ul class="nav top-menu">
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>NOMBRES</th>
-            <th>APELLIDOS</th>
-            <th>CÉDULA</th>
-            <th>EMAIL</th>
-            <th>TELÉFONO</th>
-            <th>DIRECCIÓN</th>
-            <th>ROL</th>
-            <th>USUARIO</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Johana Patricia</td>
-            <td>Cordova Rivas</td>
-            <td>0703878678</td>
-            <td>jerewat07@gmail.com</td>
-            <td>0989696271</td>
-            <td>Paris y Pragras</td>
-            <td>Empelado</td>
-            <th>jhonasanjose</th>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-       </tbody>
-      </table>
-    </section>
-  </div>
+    <form [formGroup]="tmp" class="navbar-form">
+      Buscar Usuario: <input
+            type='text'
+            class="form-control round-input input"
+            
+            placeholder='Nombre o cédula'
+            (keyup)='updateFilter($event)'
+          />
+    </form>
+
+
+  </ul>
+  <section class="panel">
+    <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns"
+      [columnMode]="'force'" [headerHeight]="40" [summaryRow]="true" [summaryPosition]="'bottom'" [footerHeight]="40"
+      [limit]="10" [rowHeight]="'auto'" [reorderable]="reorderable">
+    </ngx-datatable>
+
+  </section>
+</div>

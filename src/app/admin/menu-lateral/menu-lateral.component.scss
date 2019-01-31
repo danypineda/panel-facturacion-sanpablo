@@ -1,69 +1,87 @@
 .sidenav-container {
     height: 1%;
-  }
-  .logo{
+}
+
+.logo {
     height: 3.6rem; //tamaño del logo
-  
     border-radius: 50%;
-  }
-   /*-------------------------
+}
+
+/*-------------------------
     The menu
    --------------------------*/
-   .sidenav-container{
+
+.sidenav-container {
     // margin:60px auto 45px;
     // background-color:rgb(190, 187, 186);
     background-color: rgba(114, 75, 75, 0);
     color: white !important;
-   }
-   
-   .mat-toolbar{
-    background-color:rgb(77, 65, 61); 
+}
+
+.mat-toolbar {
+    background-color: rgb(77, 65, 61);
     color: white !important;
-   }
-   .sidenav{
+}
+
+.sidenav {
     // margin:60px auto 45px; //se mueve el menu hacia arriba
-    background-color:rgb(77, 65, 61);
-    span{
-      color: white !important;
-
+    background-color: rgb(77, 65, 61);
+    span {
+        color: white !important;
     }
+}
 
-    
-   }
-   nav.home .home,
-   nav.projects .projects,
-   nav.services .services,
-   nav.contact .contact{
-    background-color:#e35885;
-   }
+nav.home .home,
+nav.projects .projects,
+nav.services .services,
+nav.contact .contact {
+    background-color: #e35885;
+}
 
-   ng-material-multilevel-menu{
+ng-material-multilevel-menu {
     color: white !important;
-    
-  }
+}
 
-  ::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 0px;
     background: transparent;
 }
+
 .sidenav[_ngcontent-c2] {
-  background-color: #4d413dde;
+    background-color: #4d413dde;
 }
+
 .mat-toolbar[_ngcontent-c2] {
-  background-color: #4a342e;
-  color: white !important;
+    background-color: #4a342e;
+    color: white !important;
 }
+
 .form__top h2 {
-	font-weight: bold;
-	color: #CAC8C8;
-	font-size: 18px;
+    font-weight: bold;
+    color: #CAC8C8;
+    font-size: 18px;
 }
 
 h2 span {
-	color: rgb(216, 7, 0);
+    color: rgb(216, 7, 0);
 }
+
 a {
-  color: rgb(198, 235, 191);
-  text-decoration: none;
-  background-color: transparent;
+    color: rgb(198, 235, 191);
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.profile-ava img {
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border: 2px solid #688a7e;
+    display: inline-block;
+}
+
+.profile-ava img.simple {
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border: 2px solid rgba(0, 112, 255, 0.4);
+    display: inline-block;
 }

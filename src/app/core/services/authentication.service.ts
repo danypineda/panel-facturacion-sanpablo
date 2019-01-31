@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { RespuestaApi } from '../models/respuesta-api.model';
+import { ApiRestService } from './api-rest.service';
+import { TOKEN_KEY } from '../../../environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
 export class AuthenticationService {
@@ -12,40 +16,76 @@ export class AuthenticationService {
         }
     };
 
-    tokenKey: string = "a6smm_utoken"
+    tokenKey: string = TOKEN_KEY;
 
-    constructor(private router: Router) { }
+    constructor(
+        private router: Router,
+        private readonly apiRest: ApiRestService,
+        private readonly jwtHelper: JwtHelperService,
+    ) { }
 
-    login(username, password) {
-        this.setToken(this.token);
-        this.router.navigate(['admin', 'dashboard']);
+    login(data) {
+
+        this.apiRest.loginWeb(data).then(
+            (res: RespuestaApi) => {
+                switch (res.status) {
+                    case 'ok':
+                        this.setToken(res.response);
+                        this.router.navigate(['admin', 'dashboard']);
+
+                        break;
+                    case 'fail':
+                        console.log("Error Autenticación", res.response);
+                        break;
+                }
+            },
+            (err) => {
+                console.error("loginWeb", err);
+            }
+        );
+
     }
 
     logout() {
-        this.removeToken();
+        localStorage.clear();
         this.router.navigate(['login']);
     }
 
     getToken() {
-        return JSON.parse(localStorage.getItem(this.tokenKey));
+        let local = localStorage.getItem(TOKEN_KEY);
+        if (local) {
+            return JSON.parse(local).token;
+        } else {
+
+            return local;
+        }
     }
 
     setToken(token) {
+        console.log("setToken", token);
+
         localStorage.setItem(this.tokenKey, JSON.stringify(token));
     }
 
     getAccessToken() {
-        return JSON.parse(localStorage.getItem(this.tokenKey))['access_token'];
+        let local = localStorage.getItem(TOKEN_KEY);
+        if (local) {
+            return JSON.parse(local).token;
+        } else {
+
+            return local;
+        }
     }
 
     isAuthenticated() {
-        let token = localStorage.getItem(this.tokenKey);
+        let token = this.getToken();
+        console.log("prueba", this.jwtHelper.isTokenExpired(token));
 
-        if (token) {
-            return true;
+        if (this.jwtHelper.isTokenExpired(token)) {
+            return false;
         }
         else {
-            return false;
+            return true;
         }
     }
 
