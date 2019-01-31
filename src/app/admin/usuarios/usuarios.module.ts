@@ -6,11 +6,13 @@ import { UsuariosAgregarComponent } from './usuarios-agregar/usuarios-agregar.co
 import { UsuariosListarComponent } from './usuarios-listar/usuarios-listar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { AlertModule } from 'ngx-alerts';
 
 @NgModule({
   imports: [
     CommonModule,
     UsuariosRoutingModule,
+    AlertModule.forRoot({ maxMessages: 5, timeout: 5000 }),
     ReactiveFormsModule,
     NgxDatatableModule
   ],
