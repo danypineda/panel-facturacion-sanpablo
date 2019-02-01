@@ -10,6 +10,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { AlertModule } from 'ngx-alerts';
 
 @NgModule({
     imports: [
@@ -43,6 +44,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
         // NgBreadcrumbModule,
         ReactiveFormsModule,
         NgbDropdownModule,
+        AlertModule.forRoot({ maxMessages: 5, timeout: 5000 }),
     ],
     declarations: [
         AdminComponent,

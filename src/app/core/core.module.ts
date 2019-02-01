@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TOKEN_KEY } from '../../environments/environment';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlertModule } from 'ngx-alerts';
 
 export function tokenGetter() {
     let local = localStorage.getItem(TOKEN_KEY);
@@ -31,6 +32,7 @@ export function tokenGetter() {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        AlertModule.forRoot({ maxMessages: 5, timeout: 5000 }),
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,

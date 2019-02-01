@@ -6,6 +6,8 @@ import { CoreModule } from './core/core.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
+import { FormsModule } from '@angular/forms';
+import { AlertModule } from 'ngx-alerts';
 
 @NgModule({
     declarations: [
@@ -20,7 +22,9 @@ import { LayoutModule } from '@angular/cdk/layout';
         MatMenuModule,
         MatIconModule,
         MatButtonModule,
-        LayoutModule
+        LayoutModule,
+        FormsModule,
+        AlertModule.forRoot({ maxMessages: 5, timeout: 5000 }),
     ],
     providers: [],
     bootstrap: [AppComponent]

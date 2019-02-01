@@ -7,20 +7,20 @@
       </div>
     </div>
   </div>
-
+<!-- <pre>{{facturacionForm.value | json}}</pre> -->
   <div class="row">
     <div class="col">
-      <form class="navbar-form ">
+      <form class="navbar-form " [formGroup]="facturacionForm">
         <div class="row">
           <div class="col-md-4">
-            Nº factura: <input class="form-control round-input input" type="text" required>
+            Nº factura: <input class="form-control round-input input" type="text" formControlName="numFactura">
           </div>
           <div class="col-md-4 text-center">
             <p>{{configuracion.nombre}}</p>
             <p>{{configuracion.propietario}}</p>
           </div>
           <div class="col-md-4">
-            RUC Empresa: <input class="form-control round-input input" [value]="configuracion.ruc" type="text" required>
+            RUC Empresa: <input class="form-control round-input input" [value]="configuracion.ruc" type="text">
           </div>
         </div>
 
@@ -31,47 +31,59 @@
             [placeholder]="'Seleccione un cliente'"
             [data]="listaClientes"
             [settings]="clientesSettings"
-            (onSelect)="onItemSelect($event)"
+            (onSelect)="onItemSelect('ruc', $event)"
             (onSelectAll)="onSelectAll($event)"
             class="buscador-cliente"
           >
           </ng-multiselect-dropdown>
           </div>
           <div class="col-md-6">
-            Fecha de emisión: <input class="form-control round-input input" type="text" required>
+            Fecha de emisión: <input class="form-control round-input input" type="text" formControlName="fecha" readonly>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-6">
-            Nombre: <input class="form-control round-input input" type="text" required>
+            Nombre: <input class="form-control round-input input" type="text" [value]="nombres" readonly>
           </div>
           <div class="col-md-6">
-            Teléfono: <input class="form-control round-input input" type="text" required>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            Dirección: <input class="form-control round-input input" type="text" required>
-          </div>
-          <div class="col-md-6">
-            Forma de pago: <input class="form-control round-input input" type="text" required>
+            Teléfono: <input class="form-control round-input input" type="text" [value]="telefono" readonly>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-6">
-            Buscar producto: <input class="form-control round-input input" type="text" required>
+            Dirección: <input class="form-control round-input input" type="text" [value]="direccion" readonly>
+          </div>
+          <div class="col-md-6">
+            Forma de pago: <select class="form-control round-input input" formControlName="formaPago">
+              <option value="efectivo">Efectivo</option>
+              <option value="credito">Crédito</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            Buscar producto: <ng-multiselect-dropdown
+            [placeholder]="'Seleccione un producto'"
+            [data]="listaProductos"
+            [settings]="productosSettings"
+            (onSelect)="onItemSelect('producto', $event)"
+            (onSelectAll)="onSelectAll($event)"
+            class="buscador-cliente"
+          >
+          </ng-multiselect-dropdown>
           </div>
           <div class="col-md-6">
             <div class="row">
               <div class="col-md-6">
-
-                <input class="form-control round-input input" value="Cantidad" type="text" required>
+                Cantidad:
+                <input class="form-control round-input input"  type="number" min="1" [(ngModel)]="cantidadTmp" [ngModelOptions]="{standalone: true}">
               </div>
               <div class="col-md-6">
-                <button> Agregar</button>
+                <br>
+                <button type="button" class="btn btn-info" (click)="agregarProducto()"> Agregar</button>
               </div>
             </div>
           </div>
@@ -94,74 +106,53 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+            <tr *ngFor="let item of listaVenta; let id = index ">
+              <td>{{id+1}}</td>
+              <td>{{item.cantidad}}</td>
+              <td>{{item.descripcion}}</td>
+              <td>{{item.valorUnitario|currency}}</td>
+              <td>{{item.valorVenta|currency}}</td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
+           
           </tbody>
         </table>
+        <div class="row" [formGroup]="facturacionForm">
         <div class="card-body card-block form-inline">
           <div class="col-2">
             <ul class="nav top-menu pr-1">
-              <form class="navbar-form  ">
-                SUBTOTAL: <input class="form-control round-input " required>
-              </form>
+                SUBTOTAL: <input readonly class="form-control round-input " [value]="facturacionForm.get('subtotal').value | currency" formControlName="subtotal">
             </ul>
           </div>
           <div class="col-2">
             <ul class="nav top-menu pr-1">
-              <form class="navbar-form">
-                DESCUENTO: <input class="form-control round-input" required>
-              </form>
+                DESCUENTO: <input class="form-control round-input" [value]="facturacionForm.get('descuento').value | currency" formControlName="descuento">
             </ul>
           </div>
           <div class="col-2">
             <ul class="nav top-menu pr-1">
-              <form class="navbar-form">
-                IVA 0%:<input class="form-control round-input " required>
-              </form>
+                IVA 0%:<input readonly value="$00.00" class="form-control round-input " required>
 
             </ul>
           </div>
           <div class="col-2">
             <ul class="nav top-menu pr-1">
-              <form class="navbar-form">
-                IVA {{configuracion.iva}}%:<input class="form-control round-input " required>
-              </form>
+                IVA {{configuracion.iva}}%:<input readonly class="form-control round-input " [value]="facturacionForm.get('iva').value | currency" formControlName="iva">
 
             </ul>
           </div>
           <div class="col-2">
             <ul class="nav top-menu pr-1">
-              <form class="navbar-form">
-                VALOR TOTAL:<input class="form-control round-input  " type="text" required>
-              </form>
+                VALOR TOTAL:<input readonly class="form-control round-input  " type="text" [value]="facturacionForm.get('total').value | currency" formControlName="total">
 
             </ul>
           </div>
         </div>
+      </div>
 
       </section>
       <div class="btn__form">
-        <input class="btn__submit" type="submit" value="REGISTRAR">
-        <input class="btn__reset" type="reset" value="IMPRIMIR">
+        <button class="btn__submit" [disabled]="facturacionForm.invalid" (click)="facturar()">REGISTRAR</button>
+        <button class="btn__reset" type="reset">IMPRIMIR</button>
       </div>
     </div>
   </div>

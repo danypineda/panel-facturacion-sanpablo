@@ -3,7 +3,7 @@ export interface Configuracion  {
     propietario: string;
     ruc: string;
     telefono: string;
-    iva: Number;
+    iva: number;
     email: string;
     direccion: string;
 }

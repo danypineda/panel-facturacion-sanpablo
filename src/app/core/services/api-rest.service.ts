@@ -108,7 +108,7 @@ export class ApiRestService {
   }
  
   // NOTE: CONFIGURACION #############################################################################################
-
+  
   getConfiguracionEmpresa() {
     return new Promise((resolve, reject) => {
       this.http.get(`${API_URL}/api/configuracion/info`).subscribe(
@@ -118,8 +118,35 @@ export class ApiRestService {
         (err) => {
           reject(err);
         }
-      )
-    })
-  }
+        )
+      })
+    }
+    
+    // NOTE: VENTAS #############################################################################################
 
-}
+    addVenta(venta: any) {
+      return new Promise((resolve, reject) => {
+        this.http.post(`${API_URL}/api/venta/add`, venta).subscribe(
+          (data: RespuestaApi) => {
+            resolve(data);
+          },
+          (err) => {
+            reject(err);
+          }
+        )
+      })
+    }
+  
+    getVentas() {
+      return new Promise((resolve, reject) => {
+        this.http.get(`${API_URL}/api/venta/todos`).subscribe(
+          (data: RespuestaApi) => {
+            resolve(data);
+          },
+          (err) => {
+            reject(err);
+          }
+        )
+      })
+    }
+  }

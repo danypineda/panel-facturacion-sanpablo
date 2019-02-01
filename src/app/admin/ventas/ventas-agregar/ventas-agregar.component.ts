@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ApiRestService } from '../../../core/services/api-rest.service';
 import { Configuracion } from '../../../core/models/configuracion.model';
 import { RespuestaApi } from '../../../core/models/respuesta-api.model';
+import * as moment from 'moment';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TOKEN_KEY } from '../../../../environments/environment';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-ventas-agregar',
@@ -13,12 +17,42 @@ export class VentasAgregarComponent implements OnInit {
   public configuracion = {} as Configuracion;
 
   listaClientes = [];
+  listaProductos = [];
+  listaVenta = [];
   clientesSettings = {};
+  productosSettings = {};
+  usuario: any = {};
+  facturacionForm: FormGroup;
+  fechaAcctual = '';
+  nombres = '';
+  telefono = '';
+  direccion = '';
+  cantidadTmp: number = 1;
+  productoTmp: any = {};
 
   constructor(
     private readonly apiRestSrv: ApiRestService,
+    private readonly formBuilder: FormBuilder,
+    private readonly alertService: AlertService,
   ) {
     this.cargarConfiguracion();
+
+    this.usuario = JSON.parse(localStorage.getItem(TOKEN_KEY)).usuario;
+    this.fechaAcctual = moment().format('YYYY-MM-DD HH:mm');
+
+    this.facturacionForm = this.formBuilder.group({
+      numFactura: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      cliente: ['', Validators.compose([Validators.required])],
+      fecha: [this.fechaAcctual, Validators.compose([Validators.required])],
+      usuario: [this.usuario._id, Validators.required],
+      formaPago: ['efectivo', Validators.required],
+      subtotal: [0.00, Validators.required],
+      descuento: [0.00, Validators.required],
+      iva: [0.00, Validators.required],
+      total: [0.00, Validators.required]
+    });
+
+
   }
 
   private cargarConfiguracion(): void {
@@ -40,20 +74,30 @@ export class VentasAgregarComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.apiRestSrv.getClienteTodos().then(
-        (res: RespuestaApi) => {
-          console.log(res.response);
-          this.listaClientes = res.response;
-        }, (err) => {
-          console.error(err);
-  
-        }
-      );
+    this.apiRestSrv.getClienteTodos().then(
+      (res: RespuestaApi) => {
+        console.log(res.response);
+        this.listaClientes = res.response;
+      }, (err) => {
+        console.error(err);
+
+      }
+    );
+
+    this.apiRestSrv.getProductoTodos().then(
+      (res: RespuestaApi) => {
+        console.log(res.response);
+        this.listaProductos = res.response;
+      }, (err) => {
+        console.error(err);
+
+      }
+    );
 
     this.clientesSettings = {
       singleSelection: true,
       idField: '_id',
-      textField: 'nombres',
+      textField: 'identificacion',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,
@@ -61,13 +105,107 @@ export class VentasAgregarComponent implements OnInit {
       enableCheckAll: false,
       searchPlaceholderText: 'Filtrar cliente'
     };
+
+    this.productosSettings = {
+      singleSelection: true,
+      idField: '_id',
+      textField: 'nombre',
+      // itemsShowLimit: 10,
+      allowSearchFilter: true,
+      enableCheckAll: false,
+      searchPlaceholderText: 'Filtrar producto'
+    };
   }
 
-  onItemSelect(item: any) {
-    console.log(item);
+  onItemSelect(id: string, item: any) {
+
+    switch (id) {
+      case 'ruc':
+        this.facturacionForm.patchValue({ cliente: item._id });
+        this.getDatosCliente(item._id);
+        break;
+      case 'producto':
+        this.productoTmp = this.listaProductos.find(obj => obj._id == item._id)
+        break;
+
+      default:
+        console.log(item);
+
+        break;
+    }
   }
   onSelectAll(items: any) {
     console.log(items);
   }
 
+  getDatosCliente(id: string) {
+    let cliente = this.listaClientes.find(obj => obj._id == id);
+    this.nombres = `${cliente.nombres} ${cliente.apellidos}`;
+    this.telefono = `${cliente.telefono}`;
+    this.direccion = `${cliente.direccion}`;
+  }
+
+  agregarProducto(): void {
+    let item = {
+      producto: this.productoTmp._id,
+      cantidad: this.cantidadTmp,
+      descripcion: this.productoTmp.detalle,
+      valorUnitario: this.productoTmp.precio,
+      valorVenta: this.cantidadTmp * this.productoTmp.precio,
+    }
+
+    this.listaVenta.push(item);
+
+    var subtotal = 0;
+    this.listaVenta.forEach(venta => {
+      subtotal += venta.valorVenta;
+    });
+    var iva = (subtotal - this.facturacionForm.value.descuento) * (this.configuracion.iva / 100)
+    var total = subtotal + iva;
+
+    this.facturacionForm.patchValue({ subtotal: subtotal, iva: iva, total: total });
+  }
+
+  facturar(): void {
+    let dataEnviar = this.facturacionForm.getRawValue();
+    dataEnviar.productos = this.listaVenta;
+    console.log("Factura", dataEnviar);
+
+    this.apiRestSrv.addVenta(dataEnviar).then(
+      (res: RespuestaApi) => {
+        switch (res.status) {
+          case 'ok':
+            this.Alerta("success", "Venta Facturada");
+            alert('Facturado con éxito');
+            break;
+          case 'duplicado':
+            this.Alerta("error", "No se pudo facturar verifica la información");
+            break;
+          case 'fail':
+          this.Alerta("error", "No se pudo facturar verifica la información e intenta de nuevo");
+            break;
+        }
+      }, (err) => {
+        console.error("Add usuario", err);
+        this.Alerta("error", "Oops, tuvimos un problema al crear el registro, inténtalo nuevamente.");
+      }
+    );
+  }
+
+
+  Alerta(tipo: string, mensaje: string) {
+
+    switch (tipo) {
+      case "error":
+        this.alertService.danger(mensaje);
+        break;
+      case "warning":
+        this.alertService.warning(mensaje);
+        break;
+      case "success":
+        this.alertService.success(mensaje);
+        break;
+    }
+
+  }
 }
