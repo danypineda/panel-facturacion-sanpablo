@@ -1,284 +1,168 @@
-<div class="col-lg-12">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
 
-  <div class="form__top">
-    <h2>ADMINISTRACION <span>VENTAS</span></h2>
+      <div class="form__top">
+        <h2>ADMINISTRACIÓN <span>VENTAS</span></h2>
+      </div>
+    </div>
   </div>
-</div>
-<div class="col-lg-12">
 
-  <header class=" panel-heading form-control input">
-    BUSCAR CLIENTES:
-  </header>
-  <div class="col-lg-12">
-    <div class="form-panel">
-      <form class="form-inline" role="form">
-        <div class="form-group">
-          <input class="form-control round-form" placeholder="Cédula / RUC" autocomplete>
+  <div class="row">
+    <div class="col">
+      <form class="navbar-form ">
+        <div class="row">
+          <div class="col-md-4">
+            Nº factura: <input class="form-control round-input input" type="text" required>
+          </div>
+          <div class="col-md-4 text-center">
+            <p>{{configuracion.nombre}}</p>
+            <p>{{configuracion.propietario}}</p>
+          </div>
+          <div class="col-md-4">
+            RUC Empresa: <input class="form-control round-input input" [value]="configuracion.ruc" type="text" required>
+          </div>
         </div>
-        <button type="submit" class=" btn-primary">
-          <i class="fa fa-dot-circle-o"></i> Agregar
-        </button>
+
+        <div class="row">
+          <div class="col-md-6">
+            <!-- C.I/RUC: <input class="form-control round-input input" type="text" required> -->
+            C.I/RUC: <ng-multiselect-dropdown
+            [placeholder]="'Seleccione un cliente'"
+            [data]="listaClientes"
+            [settings]="clientesSettings"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+            class="buscador-cliente"
+          >
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="col-md-6">
+            Fecha de emisión: <input class="form-control round-input input" type="text" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            Nombre: <input class="form-control round-input input" type="text" required>
+          </div>
+          <div class="col-md-6">
+            Teléfono: <input class="form-control round-input input" type="text" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            Dirección: <input class="form-control round-input input" type="text" required>
+          </div>
+          <div class="col-md-6">
+            Forma de pago: <input class="form-control round-input input" type="text" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            Buscar producto: <input class="form-control round-input input" type="text" required>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+
+                <input class="form-control round-input input" value="Cantidad" type="text" required>
+              </div>
+              <div class="col-md-6">
+                <button> Agregar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </form>
     </div>
-    <section class="panel">
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>NOMBRES</th>
-            <th>APELLIDOS</th>
-            <th>CÉDULA</th>
-            <th>TELÉFONO</th>
-            <th>DIRECCIÓN</th>
-            <th>CORREO</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Johana Patricia</td>
-            <td>Cordova Rivas</td>
-            <td>0703878678</td>
-            <td>0989696271</td>
-            <td>Paris y Pragras</td>
-            <td>jerewat07@gmail.com</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Felix Geovanny</td>
-            <td>Vicente Illescas</td>
-            <td>1900813633</td>
-            <td>0994939111</td>
-            <td>Eguigure y Rengel</td>
-            <td>felixviche@gmail.com</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </div>
-</div>
-<div class="col-lg-12">
+    <div class="col-lg-12">
+      <section class="panel">
 
-  <header class="panel-heading form-control input">
-    BUSCAR PRODUCTOS:
-  </header>
-  <div class="form-panel">
-    <form class="form-inline" role="form">
-      <div class="form-group">
-        <input class="form-control round-form" placeholder="Codigo/Nombre" autocomplete>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>CANTIDAD</th>
+              <th>DESCRIPCIÓN</th>
+              <th>VALOR UNITARIO</th>
+              <th>VALOR VENTA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="card-body card-block form-inline">
+          <div class="col-2">
+            <ul class="nav top-menu pr-1">
+              <form class="navbar-form  ">
+                SUBTOTAL: <input class="form-control round-input " required>
+              </form>
+            </ul>
+          </div>
+          <div class="col-2">
+            <ul class="nav top-menu pr-1">
+              <form class="navbar-form">
+                DESCUENTO: <input class="form-control round-input" required>
+              </form>
+            </ul>
+          </div>
+          <div class="col-2">
+            <ul class="nav top-menu pr-1">
+              <form class="navbar-form">
+                IVA 0%:<input class="form-control round-input " required>
+              </form>
+
+            </ul>
+          </div>
+          <div class="col-2">
+            <ul class="nav top-menu pr-1">
+              <form class="navbar-form">
+                IVA {{configuracion.iva}}%:<input class="form-control round-input " required>
+              </form>
+
+            </ul>
+          </div>
+          <div class="col-2">
+            <ul class="nav top-menu pr-1">
+              <form class="navbar-form">
+                VALOR TOTAL:<input class="form-control round-input  " type="text" required>
+              </form>
+
+            </ul>
+          </div>
+        </div>
+
+      </section>
+      <div class="btn__form">
+        <input class="btn__submit" type="submit" value="REGISTRAR">
+        <input class="btn__reset" type="reset" value="IMPRIMIR">
       </div>
-      <button type="submit" class=" btn-primary">
-        <i class="fa fa-dot-circle-o"></i> Agregar
-      </button>
-    </form>
-  </div>
-  <section class="panel">
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <td>CODIGO</td>
-          <td>CATEGORIA</td>
-          <td>NOMBRE</td>
-          <td>DETALLE</td>
-          <td>PRECIO</td>
-          <td>STOCK</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-</div>
-
-<div class="col-lg-12">
-  <ul class="nav top-menu">
-    <div class="btn__form">
-      <form class="navbar-form">
-        <div class="card-footer">
-          Forma de Pago:<button type="submit" class=" btn-primary">
-            <i class="fa fa-dot-circle-o"></i> CREDITOS
-          </button>
-        </div>
-      </form>
-    </div>
-  </ul>
-  <header class="panel-heading form-control input">
-    DETALLE VENTA:
-  </header>
-  <div class="card-body card-block form-inline">
-      <div class="col-3">
-          <ul class="nav top-menu pr-1">
-            <form class="navbar-form  ">
-              Fecha de Emisión: <input class="form-control round-input " type="text" required>
-            </form>
-          </ul>
-        </div>
-    <div class="col-3">
-      <ul class="nav top-menu pr-1">
-        <form class="navbar-form  ">
-          Nº factura: <input class="form-control round-input " type="text" required>
-        </form>
-      </ul>
-    </div>
-    <div class="col-3">
-      <ul class="nav top-menu pr-1">
-        <form class="navbar-form">
-          Ruc de la empresa: <input class="form-control round-input " type="text" required>
-        </form>
-      </ul>
     </div>
   </div>
- Cliente: <input class="form-control round-input col-sm-9 input" type="text" required>
-  <div class="card-body card-block form-inline">
-    <div class="col-3">
-      <ul class="nav top-menu pr-1">
-        <form class="navbar-form">
-          C.i./Ruc: <input class="form-control round-input " type="text" required>
-        </form>
-      </ul>
-    </div>
-    <div class="col-3">
-        <ul class="nav top-menu pr-1">
-          <form class="navbar-form">
-            Telefono:<input class="form-control round-input  " type="text" required>
-          </form>
-  
-        </ul>
-      </div>
-      <div class="col-3">
-        <ul class="nav top-menu pr-1">
-          <form class="navbar-form">
-            Dirección:<input class="form-control round-input  " type="text" required>
-          </form>
-        </ul>
-      </div>
-  </div>
 </div>
-<div class="col-lg-12">
-  <section class="panel">
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>CANTIDAD</th>
-          <th>DESCRIPCIÓN</th>
-          <th>VALOR UNITARIO</th>
-          <th>VALOR VENTA</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-     <div class="card-body card-block form-inline">
-        <div class="col-2">
-          <ul class="nav top-menu pr-1">
-            <form class="navbar-form  ">
-              SUBTOTAL: <input class="form-control round-input " required>
-            </form>
-          </ul>
-        </div>
-        <div class="col-2">
-          <ul class="nav top-menu pr-1">
-            <form class="navbar-form">
-              DESCUENTO: <input class="form-control round-input" required>
-            </form>
-          </ul>
-        </div>
-        <div class="col-2">
-          <ul class="nav top-menu pr-1">
-            <form class="navbar-form">
-              IVA 0%:<input class="form-control round-input " required>
-            </form>
-    
-          </ul>
-        </div>
-        <div class="col-2">
-          <ul class="nav top-menu pr-1">
-            <form class="navbar-form">
-              IVA 12%:<input class="form-control round-input " required>
-            </form>
-    
-          </ul>
-        </div>
-        <div class="col-2">
-          <ul class="nav top-menu pr-1">
-            <form class="navbar-form">
-              VALOR TOTAL:<input class="form-control round-input  " type="text" required>
-            </form>
-    
-          </ul>
-        </div>
-      </div>
-    
-  </section>
-  <div class="btn__form">
-    <input class="btn__submit" type="submit" value="REGISTRAR">
-    <input class="btn__reset" type="reset" value="IMPRIMIR">
-  </div>
-</div>
-<ol>
-  <li>
-    <mat-form-field>
-      <input matInput [(ngModel)]="name" placeholder="What's your name?">
-    </mat-form-field>
-  </li>
-  <li>
-    <button mat-raised-button (click)="openDialog()">Pick one</button>
-  </li>
-  <li *ngIf="animal">
-    You chose: <i>{{animal}}</i>
-  </li>
-</ol>

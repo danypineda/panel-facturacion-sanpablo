@@ -106,5 +106,20 @@ export class ApiRestService {
       )
     })
   }
+ 
+  // NOTE: CONFIGURACION #############################################################################################
+
+  getConfiguracionEmpresa() {
+    return new Promise((resolve, reject) => {
+      this.http.get(`${API_URL}/api/configuracion/info`).subscribe(
+        (data: RespuestaApi) => {
+          resolve(data);
+        },
+        (err) => {
+          reject(err);
+        }
+      )
+    })
+  }
 
 }
