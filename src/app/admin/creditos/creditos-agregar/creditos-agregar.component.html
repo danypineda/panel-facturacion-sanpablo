@@ -1,120 +1,155 @@
-<div class="col-lg-12">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
 
-    <div class="form__top">
-        <h2>ADMINISTRACION <span>CREDITOS</span></h2>
+            <div class="form__top">
+                <h2>ADMINISTRACIÓN <span>CREDITOS</span></h2>
+            </div>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col">
+            <form class="navbar-form " [formGroup]="creditoForm">
 
-<div class="col-lg-12">
-    <header class="panel-heading form-control input">
-        DETALLE CREDITO:
-    </header>
-    <div class="card-body card-block form-inline">
-        <div class="col-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- C.I/RUC: <input class="form-control round-input input" type="text" required> -->
+                        C.I/RUC: <ng-multiselect-dropdown [placeholder]="'Seleccione un cliente'" [data]="listaClientes"
+                            [settings]="clientesSettings" (onSelect)="onItemSelect('ruc', $event)" (onSelectAll)="onSelectAll($event)"
+                            class="buscador-cliente">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="col-md-6">
+                        Fecha de emisión: <input class="form-control round-input input" type="text" formControlName="fecha"
+                            readonly>
+                    </div>
+                </div>
 
-            <form class="navbar-form">
-                Saldo Total: <input class="form-control col-sm-11 round " type="text" required>
+                <div class="row">
+                    <div class="col-md-6">
+                        Nombre: <input class="form-control round-input input" type="text" [value]="nombres" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        Teléfono: <input class="form-control round-input input" type="text" [value]="telefono" readonly>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        Buscar factura: <ng-multiselect-dropdown [placeholder]="'Seleccione una factura a credito'"
+                            [data]="listaFacturas" [settings]="facturasSettings" (onSelect)="onItemSelect('factura', $event)"
+                            (onSelectAll)="onSelectAll($event)" class="buscador-cliente">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="col-md-6">
+                        Abono: <input class="form-control round-input input" type="text" formControlName="abono">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        Saldo Total: <input class="form-control round-input input" type="number" formControlName="saldoTotal"
+                            readonly>
+                    </div>
+                    <div class="col-md-4">
+                        N° Cuotas: <input class="form-control round-input input" type="number" formControlName="numCuotas">
+
+                    </div>
+                    <div class="col-md-4">
+                        Interés Mensual: <input class="form-control round-input input" type="number" formControlName="intMensual">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        Total con crédito: <input class="form-control round-input input" type="number" formControlName="totalCredito"
+                            readonly>
+                    </div>
+                    <div class="col-md-4">
+                        Fecha primer pago: <input class="form-control round-input input" type="date" formControlName="fechaPrimerPago">
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-md-6">
+                            <br>
+                            <button type="button" class="btn btn-info" (click)="calcular()"> CALCULAR</button>
+                        </div>
+                    </div>
+                </div>
+
+
             </form>
+        </div>
 
-        </div>
-        <div class="col-3">
-            <ul class="nav top-menu pr-1">
-                <form class="navbar-form  ">
-                    Nº Cuotas: <input class="form-control round-input " type="text" required>
-                </form>
-            </ul>
-        </div>
-        <div class="col-3">
-            <ul class="nav top-menu pr-1">
-                <form class="navbar-form">
-                    Interes Mensual: <input class="form-control round-input " type="text" required>
-                </form>
-            </ul>
+        <div class="col-lg-12">
+            <section class="panel">
+
+                <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator" [columnMode]="'force'"
+                    [headerHeight]="40" [summaryRow]="true" [summaryPosition]="'bottom'" [footerHeight]="40" [limit]="10"
+                    [rowHeight]="'auto'" [reorderable]="reorderable">
+
+                    <ngx-datatable-column>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            MES
+                        </ng-template>
+                        <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                            {{row.mes}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            SALDO INICIAL
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.inicial | currency}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            AMORTIZACIÓN
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.amortizacion | currency}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            INTERESES
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.intereses | currency}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            CUOTA MES
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.cuotaMes | currency}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            SALDO FINAL
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.saldo | currency}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+
+
+            </section>
+            <div class="btn__form">
+                <button class="btn__submit" [disabled]="creditoForm.invalid" (click)="facturar()">REGISTRAR</button>
+                <button class="btn__reset" type="reset">IMPRIMIR</button>
+            </div>
         </div>
     </div>
-    <div class="card-body card-block form-inline">
-        <div class="col-3">
-            <ul class="nav top-menu pr-1">
-                <form class="navbar-form">
-                    Total con credito:<input class="form-control round-input  " type="text" required>
-                </form>
-
-            </ul>
-        </div>
-        <div class="col-3">
-            <ul class="nav top-menu pr-1">
-                <form class="navbar-form">
-                    Fecha 1er Pago:<input class="form-control round-input  " type="date" required>
-                </form>
-
-            </ul>
-        </div>
-        <div class="col-3">
-            <ul class="nav top-menu pr-1">
-                <form class="navbar-form">
-                    1er Pago:<input class="form-control round-input  " type="text" required>
-                </form>
-
-            </ul>
-        </div>
-    </div>
-</div>
-
-
-<div class="btn__form">
-    <div class="col-lg-12">
-        <section class="panel">
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nº de Cuota</th>
-                        <th>Saldo</th>
-                        <th>Fecha de Pago</th>
-                        <th>Monto</th>
-                        <th>Interes Mensual</th>
-                        <th>Estado</th>
-                        <th>Saldo Restante</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-    </div>
-</div>
-<div class="btn__form">
-    <input class="btn__submit" type="submit" value="CANCELAR">
-    <input class="btn__reset" type="reset" value="GUARDAR / EMPRIMIR">
 </div>

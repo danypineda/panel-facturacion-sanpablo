@@ -149,4 +149,17 @@ export class ApiRestService {
         )
       })
     }
+  
+    getVentasPago(idCliente:string, tipo: string) {
+      return new Promise((resolve, reject) => {
+        this.http.get(`${API_URL}/api/venta/todosPago/${idCliente}/${tipo}`).subscribe(
+          (data: RespuestaApi) => {
+            resolve(data);
+          },
+          (err) => {
+            reject(err);
+          }
+        )
+      })
+    }
   }

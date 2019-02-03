@@ -16,7 +16,7 @@ export class VentasListarComponent implements OnInit {
 
   columns = [
     { prop: 'numFactura', summaryFunc: () => null },
-    { prop: 'cliente', summaryFunc: () => null },
+    { prop: 'cliente.nombres'+'cliente.apellidos', summaryFunc: () => null },
     { prop: 'fecha', summaryFunc: () => null },
     { prop: 'total', summaryFunc: () => null },
     { prop: 'usuario', summaryFunc: () => null },
