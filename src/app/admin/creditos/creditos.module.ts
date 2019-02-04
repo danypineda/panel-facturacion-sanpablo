@@ -13,9 +13,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
   imports: [
     CommonModule, 
     CreditosRoutingModule,
+    AlertModule.forRoot({ maxMessages: 5, timeout: 5000 }),
     FormsModule,
     ReactiveFormsModule,
-    AlertModule.forRoot({ maxMessages: 5, timeout: 5000 }),
     NgMultiSelectDropDownModule.forRoot(),
     NgxDatatableModule,
   ],

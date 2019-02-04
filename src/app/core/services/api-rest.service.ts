@@ -162,4 +162,45 @@ export class ApiRestService {
         )
       })
     }
+
+    // NOTE: CREDITOS #############################################################################################
+  
+    addCredito(credito: any) {
+      return new Promise((resolve, reject) => {
+        this.http.post(`${API_URL}/api/credito/add`, credito).subscribe(
+          (data: RespuestaApi) => {
+            resolve(data);
+          },
+          (err) => {
+            reject(err);
+          }
+        )
+      })
+    }
+  
+    getCreditos(id:string) {
+      return new Promise((resolve, reject) => {
+        this.http.get(`${API_URL}/api/credito/todos/${id}`).subscribe(
+          (data: RespuestaApi) => {
+            resolve(data);
+          },
+          (err) => {
+            reject(err);
+          }
+        )
+      })
+    }
+  
+    getCredito(id:string) {
+      return new Promise((resolve, reject) => {
+        this.http.get(`${API_URL}/api/credito/detalle/${id}`).subscribe(
+          (data: RespuestaApi) => {
+            resolve(data);
+          },
+          (err) => {
+            reject(err);
+          }
+        )
+      })
+    }
   }

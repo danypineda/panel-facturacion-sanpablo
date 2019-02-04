@@ -6,9 +6,8 @@ html {
 
 
 .container {
-	max-width: 450px;
 	height: auto;
-	background-color: #EFEFEF;
+	background-color: rgba(0, 0, 0, 0.418);
 	margin: 5% auto;
 	padding-bottom: 1rem;
 	
@@ -52,6 +51,18 @@ h2 span {
 	border: none;
 	border-bottom: solid #C8C8C8 .2rem;
 	transition: all .5s;
+}
+
+.buscador-cliente{
+	background-color: greenyellow !important;
+	.dropdown-btn{
+		background-color: #EFEFEF !important;
+		padding: .5rem !important;
+		margin: .5rem 0 !important;
+		border: none !important;
+		border-bottom: solid #C8C8C8 .2rem !important;
+		transition: all .5s !important;
+	}
 }
 
 .input:focus {

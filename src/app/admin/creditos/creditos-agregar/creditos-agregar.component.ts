@@ -24,7 +24,6 @@ export class CreditosAgregarComponent implements OnInit {
 
   listaClientes = [];
   listaFacturas = [];
-  listaVenta = [];
   clientesSettings = {};
   facturasSettings = {};
   usuario: any = {};
@@ -49,15 +48,16 @@ export class CreditosAgregarComponent implements OnInit {
     this.fechaAcctual = moment().format('YYYY-MM-DD HH:mm');
 
     this.creditoForm = this.formBuilder.group({
+      idFactura: ['', Validators.required],
       saldoTotal: [0.00, Validators.compose([Validators.required])],
+      cliente: ['', Validators.required],
+      fecha: [this.fechaAcctual, Validators.compose([Validators.required])],
+      fechaPrimerPago: ['', Validators.required],
+      usuario: [this.usuario._id, Validators.required],
       numCuotas: [0, Validators.compose([Validators.required])],
       intMensual: [0, Validators.compose([Validators.required])],
       totalCredito: [0.00, Validators.required],
-      fechaPrimerPago: ['', Validators.required],
       abono: [0.00, Validators.required],
-      cliente: ['', Validators.required],
-      fecha: [this.fechaAcctual, Validators.compose([Validators.required])],
-      idFactura: ['', Validators.required]
     });
 
 
@@ -125,7 +125,7 @@ export class CreditosAgregarComponent implements OnInit {
         break;
       case 'factura':
         this.facturaTmp = this.listaFacturas.find(obj => obj._id == item._id);
-        this.creditoForm.patchValue({ saldoTotal: this.facturaTmp.total })
+        this.creditoForm.patchValue({ idFactura: this.facturaTmp._id, saldoTotal: this.facturaTmp.total })
         break;
 
       default:
@@ -207,30 +207,33 @@ export class CreditosAgregarComponent implements OnInit {
     // this.creditoForm.patchValue({ subtotal: subtotal, iva: iva, total: total });
   }
 
-  facturar2(): void {
-    let dataEnviar = this.creditoForm.getRawValue();
-    dataEnviar.productos = this.listaVenta;
-    console.log("Factura", dataEnviar);
+  amortizar(): void {
 
-    this.apiRestSrv.addVenta(dataEnviar).then(
-      (res: RespuestaApi) => {
-        switch (res.status) {
-          case 'ok':
-            this.Alerta("success", "Venta Facturada");
-            alert('Facturado con éxito');
-            break;
-          case 'duplicado':
-            this.Alerta("error", "No se pudo facturar verifica la información");
-            break;
-          case 'fail':
-            this.Alerta("error", "No se pudo facturar verifica la información e intenta de nuevo");
-            break;
+    if (this.rows.length > 0) {
+      let dataEnviar = this.creditoForm.getRawValue();
+      dataEnviar.tablaAmortizacion = this.rows;
+      console.log("Amortizar", dataEnviar);
+
+      this.apiRestSrv.addCredito(dataEnviar).then(
+        (res: RespuestaApi) => {
+          switch (res.status) {
+            case 'ok':
+              this.Alerta("success", "Venta Facturada");
+              break;
+            case 'duplicado':
+              this.Alerta("error", "No se pudo facturar verifica la información");
+              break;
+            case 'fail':
+              this.Alerta("error", "No se pudo facturar verifica la información e intenta de nuevo");
+              break;
+          }
+        }, (err) => {
+          console.error("Add usuario", err);
+          this.Alerta("error", "Oops, tuvimos un problema al crear el registro, inténtalo nuevamente.");
         }
-      }, (err) => {
-        console.error("Add usuario", err);
-        this.Alerta("error", "Oops, tuvimos un problema al crear el registro, inténtalo nuevamente.");
-      }
-    );
+      );
+    }
+
   }
 
   private getFacturas(): void {
