@@ -4,6 +4,7 @@ import { RespuestaApi } from '../models/respuesta-api.model';
 import { ApiRestService } from './api-rest.service';
 import { TOKEN_KEY } from '../../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AlertService } from 'ngx-alerts';
 
 @Injectable()
 export class AuthenticationService {
@@ -22,6 +23,7 @@ export class AuthenticationService {
         private router: Router,
         private readonly apiRest: ApiRestService,
         private readonly jwtHelper: JwtHelperService,
+        private readonly alertService: AlertService,
     ) { }
 
     login(data) {
@@ -34,12 +36,18 @@ export class AuthenticationService {
                         this.router.navigate(['admin', 'dashboard']);
 
                         break;
+                    case 'incorrect':
+                        console.log("Error Autenticación", res.response);
+                        this.Alerta('error', res.response);
+                        break;
                     case 'fail':
+                        this.Alerta('warning', `SERVER ERROR: ${JSON.stringify(res.response)}`);
                         console.log("Error Autenticación", res.response);
                         break;
                 }
             },
             (err) => {
+                this.Alerta('warning', `SERVER ERROR: ${JSON.stringify(err)}`);
                 console.error("loginWeb", err);
             }
         );
@@ -96,6 +104,22 @@ export class AuthenticationService {
 
     removeToken() {
         localStorage.removeItem(this.tokenKey);
+    }
+
+    Alerta(tipo: string, mensaje: string) {
+
+        switch (tipo) {
+            case "error":
+                this.alertService.danger(mensaje);
+                break;
+            case "warning":
+                this.alertService.warning(mensaje);
+                break;
+            case "success":
+                this.alertService.success(mensaje);
+                break;
+        }
+
     }
 
 }

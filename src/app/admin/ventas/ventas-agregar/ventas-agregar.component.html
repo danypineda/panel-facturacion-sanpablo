@@ -71,6 +71,7 @@
             [settings]="productosSettings"
             (onSelect)="onItemSelect('producto', $event)"
             (onSelectAll)="onSelectAll($event)"
+            (onDeSelect)="onItemDeSelect('producto', $event)"
             class="buscador-cliente"
           >
           </ng-multiselect-dropdown>
@@ -103,15 +104,19 @@
               <th>DESCRIPCIÓN</th>
               <th>VALOR UNITARIO</th>
               <th>VALOR VENTA</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of listaVenta; let id = index ">
-              <td>{{id+1}}</td>
+              <td>{{id+1}} </td>
               <td>{{item.cantidad}}</td>
               <td>{{item.descripcion}}</td>
               <td>{{item.valorUnitario|currency}}</td>
               <td>{{item.valorVenta|currency}}</td>
+              <td><button type="button" class="btn btn-danger" aria-label="Close" (click)="quitarArticulo(id)">
+                <span aria-hidden="true">&times;</span>
+              </button></td>
             </tr>
            
           </tbody>
@@ -125,7 +130,7 @@
           </div>
           <div class="col-2">
             <ul class="nav top-menu pr-1">
-                DESCUENTO: <input class="form-control round-input" [value]="facturacionForm.get('descuento').value | currency" formControlName="descuento">
+                DESCUENTO: <input class="form-control round-input" (keyup)="cambioDescuento($event)" type="number" min="0" formControlName="descuento">
             </ul>
           </div>
           <div class="col-2">

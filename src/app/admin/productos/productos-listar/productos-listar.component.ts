@@ -55,6 +55,8 @@ export class ProductosListarComponent implements OnInit {
     // filter our data
     const temp = this.temp.filter(function (d) {
 
+      returnData = false;
+
       if (d.nombre.toLowerCase().indexOf(val) !== -1 || !val) {
         returnData = d.nombre.toLowerCase().indexOf(val) !== -1 || !val;
       } else if (d.codigo.toLowerCase().indexOf(val) !== -1 || !val) {

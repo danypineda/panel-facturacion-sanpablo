@@ -54,6 +54,15 @@
         
         <ngx-datatable-column>
           <ng-template let-column="column" ngx-datatable-header-template>
+              Forma de Pago
+          </ng-template>
+          <ng-template let-row="row" ngx-datatable-cell-template>
+              {{row.formaPago}}
+          </ng-template>
+      </ngx-datatable-column>
+        
+        <ngx-datatable-column>
+          <ng-template let-column="column" ngx-datatable-header-template>
               Usuario
           </ng-template>
           <ng-template let-row="row" ngx-datatable-cell-template>

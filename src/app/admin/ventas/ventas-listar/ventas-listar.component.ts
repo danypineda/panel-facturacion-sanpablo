@@ -52,11 +52,15 @@ export class VentasListarComponent implements OnInit {
     // filter our data
     const temp = this.temp.filter(function (d) {
 
+      returnData = false;
+
       if (d.numFactura.toLowerCase().indexOf(val) !== -1 || !val) {
         returnData = d.numFactura.toLowerCase().indexOf(val) !== -1 || !val;
-      } else if (d.cliente.toLowerCase().indexOf(val) !== -1 || !val) {
-        returnData = d.cliente.toLowerCase().indexOf(val) !== -1 || !val;
-
+        
+      } else if (d.cliente.nombres.toLowerCase().indexOf(val) !== -1 || !val) {
+        returnData = d.cliente.nombres.toLowerCase().indexOf(val) !== -1 || !val;
+      }else if (d.cliente.apellidos.toLowerCase().indexOf(val) !== -1 || !val) {
+        returnData = d.cliente.apellidos.toLowerCase().indexOf(val) !== -1 || !val;
       }
       return returnData;
     });

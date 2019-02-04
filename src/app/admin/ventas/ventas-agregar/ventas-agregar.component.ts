@@ -138,6 +138,23 @@ export class VentasAgregarComponent implements OnInit {
     console.log(items);
   }
 
+  onItemDeSelect(id: string, item: any) {
+
+    switch (id) {
+      case 'ruc':
+        this.facturacionForm.patchValue({ cliente: '' });
+        break;
+      case 'producto':
+        this.productoTmp = undefined;
+        break;
+
+      default:
+        console.log(item);
+
+        break;
+    }
+  }
+
   getDatosCliente(id: string) {
     let cliente = this.listaClientes.find(obj => obj._id == id);
     this.nombres = `${cliente.nombres} ${cliente.apellidos}`;
@@ -146,24 +163,27 @@ export class VentasAgregarComponent implements OnInit {
   }
 
   agregarProducto(): void {
-    let item = {
-      producto: this.productoTmp._id,
-      cantidad: this.cantidadTmp,
-      descripcion: this.productoTmp.detalle,
-      valorUnitario: this.productoTmp.precio,
-      valorVenta: this.cantidadTmp * this.productoTmp.precio,
+    if (this.productoTmp._id) {
+
+      let item = {
+        producto: this.productoTmp._id,
+        cantidad: this.cantidadTmp,
+        descripcion: this.productoTmp.detalle,
+        valorUnitario: this.productoTmp.precio,
+        valorVenta: this.cantidadTmp * this.productoTmp.precio,
+      }
+
+      this.listaVenta.push(item);
+
+      var subtotal = 0;
+      this.listaVenta.forEach(venta => {
+        subtotal += venta.valorVenta;
+      });
+      var iva = (subtotal - this.facturacionForm.value.descuento) * (this.configuracion.iva / 100);
+      var total = (subtotal - this.facturacionForm.value.descuento) + iva;
+
+      this.facturacionForm.patchValue({ subtotal: subtotal, iva: iva, total: total });
     }
-
-    this.listaVenta.push(item);
-
-    var subtotal = 0;
-    this.listaVenta.forEach(venta => {
-      subtotal += venta.valorVenta;
-    });
-    var iva = (subtotal - this.facturacionForm.value.descuento) * (this.configuracion.iva / 100)
-    var total = subtotal + iva;
-
-    this.facturacionForm.patchValue({ subtotal: subtotal, iva: iva, total: total });
   }
 
   facturar(): void {
@@ -182,7 +202,7 @@ export class VentasAgregarComponent implements OnInit {
             this.Alerta("error", "No se pudo facturar verifica la información");
             break;
           case 'fail':
-          this.Alerta("error", "No se pudo facturar verifica la información e intenta de nuevo");
+            this.Alerta("error", "No se pudo facturar verifica la información e intenta de nuevo");
             break;
         }
       }, (err) => {
@@ -192,6 +212,29 @@ export class VentasAgregarComponent implements OnInit {
     );
   }
 
+  quitarArticulo(id): void {
+    this.listaVenta.splice(id, 1);
+
+    var subtotal = 0;
+    this.listaVenta.forEach(venta => {
+      subtotal += venta.valorVenta;
+    });
+    var iva = (subtotal - this.facturacionForm.value.descuento) * (this.configuracion.iva / 100);
+    var total = (subtotal - this.facturacionForm.value.descuento) + iva;
+
+    this.facturacionForm.patchValue({ subtotal: subtotal, iva: iva, total: total });
+  }
+
+  cambioDescuento(event): void {
+    var subtotal = 0;
+    this.listaVenta.forEach(venta => {
+      subtotal += venta.valorVenta;
+    });
+    var iva = (subtotal - this.facturacionForm.value.descuento) * (this.configuracion.iva / 100);
+    var total = (subtotal - this.facturacionForm.value.descuento) + iva;
+
+    this.facturacionForm.patchValue({ subtotal: subtotal, iva: iva, total: total });
+  }
 
   Alerta(tipo: string, mensaje: string) {
 
