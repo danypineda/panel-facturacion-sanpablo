@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ApiRestService } from '../../../core/services/api-rest.service';
 import { RespuestaApi } from '../../../core/models/respuesta-api.model';
+import { LocalDataSource } from 'ng2-smart-table';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-clientes-listar',
@@ -10,23 +12,62 @@ import { RespuestaApi } from '../../../core/models/respuesta-api.model';
 })
 export class ClientesListarComponent implements OnInit {
 
-  rows = [];
-  temp = [];
-  loadingIndicator: boolean = true;
-  reorderable: boolean = true;
+  settings = {
+    columns: {
+      nombres: {
+        title: 'NOMBRES',
+        type: 'string',
+      },
+      apellidos: {
+        title: 'APELLIDOS',
+        type: 'string',
+      },
+      identificacion: {
+        title: 'DOC. IDENT.',
+        type: 'string',
+      },
+      email: {
+        title: 'CORREO',
+        type: 'string',
+      },
+      telefono: {
+        title: 'TELÉFONO',
+        type: 'string',
+      },
+      direccion: {
+        title: 'DIRECCIÓN',
+        type: 'text',
+        editor: {
+          type: 'textarea '
+        }
+      },
+    },
+    attr: {
+      class: 'table table-hover table-dark'
+    },
+    actions: {
+      columnTitle: 'Operaciones',
+      add: false,
+      position: 'right',
+    },
+    edit: {
+      editButtonContent: 'Modificar ',
+      saveButtonContent: 'Guardar',
+      cancelButtonContent: 'Cancelar',
+      confirmSave: true,
+      inputClass: 'smart-table-input'
+    },
+    delete: {
+      deleteButtonContent: 'Eliminar',
+      confirmDelete: true,
+    }
+  };
 
-  columns = [
-    { prop: 'nombres', summaryFunc: () => null },
-    { prop: 'apellidos', summaryFunc: () => null },
-    { prop: 'identificacion', summaryFunc: () => null },
-    { prop: 'email', summaryFunc: () => null },
-    { prop: 'telefono', summaryFunc: () => null },
-    { prop: 'direccion', summaryFunc: () => null },
-  ];
-  @ViewChild(DatatableComponent) table: DatatableComponent;
+  source: LocalDataSource = new LocalDataSource();
 
   constructor(
     private readonly apiRestSrv: ApiRestService,
+    private readonly alertService: AlertService,
   ) { }
 
   ngOnInit() {
@@ -37,9 +78,7 @@ export class ClientesListarComponent implements OnInit {
     this.apiRestSrv.getClienteTodos().then(
       (res: RespuestaApi) => {
         console.log(res.response);
-        this.loadingIndicator = false;
-        this.temp = [...res.response];
-        this.rows = res.response;
+        this.source.load(res.response);
       }, (err) => {
         console.error(err);
 
@@ -47,18 +86,72 @@ export class ClientesListarComponent implements OnInit {
     );
   }
 
-  updateFilter(event) {
-    const val = event.target.value.toLowerCase();
+  onDeleteConfirm(event) {
+    if (window.confirm('¿Deseas eliminar este registro?')) {
+      this.eliminarCliente(event.data._id);
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+  }
 
-    // filter our data
-    const temp = this.temp.filter(function (d) {
-      return d.identificacion.toLowerCase().indexOf(val) !== -1 || !val;
-    });
+  onSaveConfirm(event) {
+    if (window.confirm('¿Deseas guardar los cambios?')) {
+      this.actualizarCliente(event.newData);
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+  }
 
-    // update the rows
-    this.rows = temp;
-    // Whenever the filter changes, always go back to the first page
-    this.table.offset = 0;
+  public actualizarCliente(data): void {
+    this.apiRestSrv.updateCliente(data).then(
+      (res: RespuestaApi) => {
+        switch (res.status) {
+          case 'ok':
+            this.Alerta("success", "Cliente actualizado");
+            break;
+          case 'fail':
+            this.Alerta("error", "Oops, tuvimos un problema al actualizar el registro, inténtalo nuevamente.");
+            break;
+        }
+      }, (err) => {
+        this.Alerta("error", "Oops, tuvimos un problema al actualizar el registro, inténtalo nuevamente.");
+      }
+    );
+  }
+
+  public eliminarCliente(data): void {
+    this.apiRestSrv.delCliente(data).then(
+      (res: RespuestaApi) => {
+        switch (res.status) {
+          case 'ok':
+            this.Alerta("success", "Cliente eliminado");
+            break;
+          case 'fail':
+            this.Alerta("error", "Oops, tuvimos un problema al eliminar el registro, inténtalo nuevamente.");
+            break;
+        }
+      }, (err) => {
+        this.Alerta("error", "Oops, tuvimos un problema al eliminar el registro, inténtalo nuevamente.");
+      }
+    );
+  }
+
+  Alerta(tipo: string, mensaje: string) {
+
+    switch (tipo) {
+      case "error":
+        this.alertService.danger(mensaje);
+        break;
+      case "warning":
+        this.alertService.warning(mensaje);
+        break;
+      case "success":
+        this.alertService.success(mensaje);
+        break;
+    }
+
   }
 
 }

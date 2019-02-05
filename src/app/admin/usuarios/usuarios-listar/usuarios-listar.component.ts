@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ApiRestService } from '../../../core/services/api-rest.service';
 import { RespuestaApi } from '../../../core/models/respuesta-api.model';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { LocalDataSource } from 'ng2-smart-table';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-usuarios-listar',
@@ -10,32 +12,76 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
   styleUrls: ['./usuarios-listar.component.scss']
 })
 export class UsuariosListarComponent implements OnInit {
-  rows = [];
-  temp = [];
-  loadingIndicator: boolean = true;
-  reorderable: boolean = true;
 
-  columns = [
-    { prop: 'cedula', summaryFunc: () => null },
-    { prop: 'nombres', summaryFunc: () => null },
-    { prop: 'apellidos', summaryFunc: () => null },
-    { prop: 'email', summaryFunc: () => null },
-    { prop: 'telefono', summaryFunc: () => null },
-    { prop: 'usuario', summaryFunc: () => null },
-    { prop: 'rol', canAutoResize: true, summaryFunc: () => null }
-  ];
-  public tmp: FormGroup;
-  @ViewChild(DatatableComponent) table: DatatableComponent;
+  settings = {
+    columns: {
+      cedula: {
+        title: 'CÉDULA',
+        type: 'string',
+      },
+      nombres: {
+        title: 'NOMBRES',
+        type: 'string',
+      },
+      apellidos: {
+        title: 'APELLIDOS',
+        type: 'string',
+      },
+      email: {
+        title: 'CORREO',
+        type: 'string',
+      },
+      telefono: {
+        title: 'TELÉFONO',
+        type: 'string',
+      },
+      usuario: {
+        title: 'USUARIO',
+        type: 'text'
+      },
+      rol: {
+        title: 'ROL',
+        type: 'text',
+        editor: {
+          type: 'list',
+          config: {
+            list: [
+              { value: 'admin', title: 'Administrador' },
+              { value: 'empleado', title: 'Empleado' }
+            ]
+          }
+        }
+      },
+    },
+    attr: {
+      class: 'table table-hover table-dark'
+    },
+    actions: {
+      columnTitle: 'Operaciones',
+      add: false,
+      position: 'right',
+    },
+    edit: {
+      editButtonContent: 'Modificar ',
+      saveButtonContent: 'Guardar',
+      cancelButtonContent: 'Cancelar',
+      confirmSave: true,
+      inputClass: 'smart-table-input'
+    },
+    delete: {
+      deleteButtonContent: 'Eliminar',
+      confirmDelete: true,
+    }
+  };
+
+  source: LocalDataSource = new LocalDataSource();
 
   constructor(
-    private formBuilder: FormBuilder,
     private readonly apiRestSrv: ApiRestService,
+    private readonly alertService: AlertService,
   ) { }
 
   ngOnInit() {
-    this.tmp = this.formBuilder.group({
-      "busqueda": [""]
-    });
 
     this.cargarDatos();
   }
@@ -43,10 +89,7 @@ export class UsuariosListarComponent implements OnInit {
   private cargarDatos(): void {
     this.apiRestSrv.getUsuarioTodos().then(
       (res: RespuestaApi) => {
-        console.log(res.response);
-        this.loadingIndicator = false;
-        this.temp = [...res.response];
-        this.rows = res.response;
+        this.source.load(res.response);
       }, (err) => {
         console.error(err);
 
@@ -54,17 +97,72 @@ export class UsuariosListarComponent implements OnInit {
     );
   }
 
-  updateFilter(event) {
-    const val = event.target.value.toLowerCase();
-
-    // filter our data
-    const temp = this.temp.filter(function (d) {
-      return d.cedula.toLowerCase().indexOf(val) !== -1 || !val;
-    });
-
-    // update the rows
-    this.rows = temp;
-    // Whenever the filter changes, always go back to the first page
-    this.table.offset = 0;
+  onDeleteConfirm(event) {
+    if (window.confirm('¿Deseas eliminar este registro?')) {
+      this.eliminarUsuario(event.data._id);
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
   }
+
+  onSaveConfirm(event) {
+    if (window.confirm('¿Deseas guardar los cambios?')) {
+      this.actualizarUsuario(event.newData);
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+  }
+
+  public actualizarUsuario(data): void {
+    this.apiRestSrv.updateUsuario(data).then(
+      (res: RespuestaApi) => {
+        switch (res.status) {
+          case 'ok':
+            this.Alerta("success", "Usuario actualizado");
+            break;
+          case 'fail':
+            this.Alerta("error", "Oops, tuvimos un problema al actualizar el registro, inténtalo nuevamente.");
+            break;
+        }
+      }, (err) => {
+        this.Alerta("error", "Oops, tuvimos un problema al actualizar el registro, inténtalo nuevamente.");
+      }
+    );
+  }
+
+  public eliminarUsuario(data): void {
+    this.apiRestSrv.delUsuario(data).then(
+      (res: RespuestaApi) => {
+        switch (res.status) {
+          case 'ok':
+            this.Alerta("success", "Usuario eliminado");
+            break;
+          case 'fail':
+            this.Alerta("error", "Oops, tuvimos un problema al eliminar el registro, inténtalo nuevamente.");
+            break;
+        }
+      }, (err) => {
+        this.Alerta("error", "Oops, tuvimos un problema al eliminar el registro, inténtalo nuevamente.");
+      }
+    );
+  }
+
+  Alerta(tipo: string, mensaje: string) {
+
+    switch (tipo) {
+      case "error":
+        this.alertService.danger(mensaje);
+        break;
+      case "warning":
+        this.alertService.warning(mensaje);
+        break;
+      case "success":
+        this.alertService.success(mensaje);
+        break;
+    }
+
+  }
+
 }

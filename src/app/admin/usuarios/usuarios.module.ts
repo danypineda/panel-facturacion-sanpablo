@@ -7,6 +7,8 @@ import { UsuariosListarComponent } from './usuarios-listar/usuarios-listar.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AlertModule } from 'ngx-alerts';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 
 @NgModule({
   imports: [
@@ -14,7 +16,8 @@ import { AlertModule } from 'ngx-alerts';
     UsuariosRoutingModule,
     AlertModule.forRoot({ maxMessages: 5, timeout: 5000 }),
     ReactiveFormsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    Ng2SmartTableModule,
   ],
   declarations: [UsuariosComponent, UsuariosAgregarComponent, UsuariosListarComponent]
 })

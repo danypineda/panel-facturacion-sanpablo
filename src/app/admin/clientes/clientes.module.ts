@@ -7,6 +7,7 @@ import { ClientesAgregarComponent } from './clientes-agregar/clientes-agregar.co
 import { ReactiveFormsModule } from '@angular/forms';
 import { AlertModule } from 'ngx-alerts';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     AlertModule.forRoot({ maxMessages: 5, timeout: 5000 }),
     ReactiveFormsModule,
     NgxDatatableModule,
+    Ng2SmartTableModule,
   ],
   declarations: [ClientesComponent, ClientesListarComponent, ClientesAgregarComponent]
 })

@@ -3,31 +3,74 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ApiRestService } from '../../../core/services/api-rest.service';
 import { RespuestaApi } from '../../../core/models/respuesta-api.model';
+import { LocalDataSource } from 'ng2-smart-table';
+import { CurrencyPipe } from '@angular/common';
+import { AlertService } from 'ngx-alerts';
 
 @Component({
   selector: 'app-productos-listar',
   templateUrl: './productos-listar.component.html',
-  styleUrls: ['./productos-listar.component.scss']
+  styleUrls: ['./productos-listar.component.scss'],
+  providers: [CurrencyPipe]
 })
 export class ProductosListarComponent implements OnInit {
 
-  rows = [];
-  temp = [];
-  loadingIndicator: boolean = true;
-  reorderable: boolean = true;
+  settings = {
+    columns: {
+      codigo: {
+        title: 'CÓDIGO',
+        type: 'string',
+      },
+      categoria: {
+        title: 'CATEGORÍA',
+        type: 'string',
+      },
+      nombre: {
+        title: 'NOMBRE',
+        type: 'string',
+      },
+      detalle: {
+        title: 'DETALLE',
+        type: 'string',
+      },
+      precio: {
+        title: 'PRECIO',
+        type: 'number',
+        valuePrepareFunction: (precio) => { return this.currencyPipe.transform(precio); }
+      },
 
-  columns = [
-    { prop: 'codigo', summaryFunc: () => null },
-    { prop: 'categoria', summaryFunc: () => null },
-    { prop: 'nombre', summaryFunc: () => null },
-    { prop: 'detalle', summaryFunc: () => null },
-    { prop: 'precio', summaryFunc: () => null },
-    { prop: 'stock', summaryFunc: () => null },
-  ];
-  @ViewChild(DatatableComponent) table: DatatableComponent;
+      stock: {
+        title: 'STOCK',
+        type: 'number'
+      },
+    },
+    attr: {
+      class: 'table table-hover table-dark'
+    },
+    actions: {
+      columnTitle: 'Operaciones',
+      add: false,
+      position: 'right',
+    },
+    edit: {
+      editButtonContent: 'Modificar ',
+      saveButtonContent: 'Guardar',
+      cancelButtonContent: 'Cancelar',
+      confirmSave: true,
+      inputClass: 'smart-table-input'
+    },
+    delete: {
+      deleteButtonContent: 'Eliminar',
+      confirmDelete: true,
+    }
+  };
+
+  source: LocalDataSource = new LocalDataSource();
 
   constructor(
     private readonly apiRestSrv: ApiRestService,
+    private currencyPipe: CurrencyPipe,
+    private alertService: AlertService,
   ) { }
 
   ngOnInit() {
@@ -37,10 +80,7 @@ export class ProductosListarComponent implements OnInit {
   private cargarDatos(): void {
     this.apiRestSrv.getProductoTodos().then(
       (res: RespuestaApi) => {
-        console.log(res.response);
-        this.loadingIndicator = false;
-        this.temp = [...res.response];
-        this.rows = res.response;
+        this.source.load(res.response);
       }, (err) => {
         console.error(err);
 
@@ -48,28 +88,71 @@ export class ProductosListarComponent implements OnInit {
     );
   }
 
-  updateFilter(event) {
-    const val = event.target.value.toLowerCase();
-
-    var returnData: any;
-    // filter our data
-    const temp = this.temp.filter(function (d) {
-
-      returnData = false;
-
-      if (d.nombre.toLowerCase().indexOf(val) !== -1 || !val) {
-        returnData = d.nombre.toLowerCase().indexOf(val) !== -1 || !val;
-      } else if (d.codigo.toLowerCase().indexOf(val) !== -1 || !val) {
-        returnData = d.codigo.toLowerCase().indexOf(val) !== -1 || !val;
-
-      }
-      return returnData;
-    });
-
-    // update the rows
-    this.rows = temp;
-    // Whenever the filter changes, always go back to the first page
-    this.table.offset = 0;
+  onDeleteConfirm(event) {
+    if (window.confirm('¿Deseas eliminar este registro?')) {
+      this.eliminarProducto(event.data._id);
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
   }
 
+  onSaveConfirm(event) {
+    if (window.confirm('¿Deseas guardar los cambios?')) {
+      this.actualizarProducto(event.newData);
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+  }
+
+  public actualizarProducto(data): void {
+    this.apiRestSrv.updateProducto(data).then(
+      (res: RespuestaApi) => {
+        switch (res.status) {
+          case 'ok':
+            this.Alerta("success", "Producto actualizado");
+            break;
+          case 'fail':
+            this.Alerta("error", "Oops, tuvimos un problema al actualizar el registro, inténtalo nuevamente.");
+            break;
+        }
+      }, (err) => {
+        this.Alerta("error", "Oops, tuvimos un problema al actualizar el registro, inténtalo nuevamente.");
+      }
+    );
+  }
+
+  public eliminarProducto(data): void {
+    this.apiRestSrv.delProducto(data).then(
+      (res: RespuestaApi) => {
+        switch (res.status) {
+          case 'ok':
+            this.Alerta("success", "Producto eliminado");
+            break;
+          case 'fail':
+            this.Alerta("error", "Oops, tuvimos un problema al eliminar el registro, inténtalo nuevamente.");
+            break;
+        }
+      }, (err) => {
+        this.Alerta("error", "Oops, tuvimos un problema al eliminar el registro, inténtalo nuevamente.");
+      }
+    );
+  }
+
+  Alerta(tipo: string, mensaje: string) {
+
+    switch (tipo) {
+      case "error":
+        this.alertService.danger(mensaje);
+        break;
+      case "warning":
+        this.alertService.warning(mensaje);
+        break;
+      case "success":
+        this.alertService.success(mensaje);
+        break;
+    }
+
+  }
 }

@@ -1,32 +1,22 @@
-<div class="col-lg-12">
+<div class="container">
+    <div class="row">
 
-  <div class="form__top">
-    <h2>REPORTES <span>USUARIOS</span></h2>
-  </div>
+        <div class="col-lg-12">
+            <div class="form__top">
+                <h2>REPORTES <span>USARIOS</span></h2>
+            </div>
 
-</div>
+        </div>
 
-<div class="col-lg-12">
-  <div class="form__top"></div>
-  <ul class="nav top-menu">
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
 
-    <form [formGroup]="tmp" class="navbar-form">
-      Buscar Usuario: <input
-            type='text'
-            class="form-control round-input input"
-            
-            placeholder='Nombre o cédula'
-            (keyup)='updateFilter($event)'
-          />
-    </form>
+                <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
+                (editConfirm)="onSaveConfirm($event)"></ng2-smart-table>
 
-
-  </ul>
-  <section class="panel">
-    <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns"
-      [columnMode]="'force'" [headerHeight]="40" [summaryRow]="true" [summaryPosition]="'bottom'" [footerHeight]="40"
-      [limit]="10" [rowHeight]="'auto'" [reorderable]="reorderable">
-    </ngx-datatable>
-
-  </section>
+            </section>
+        </div>
+    </div>
 </div>

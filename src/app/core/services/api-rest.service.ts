@@ -25,6 +25,33 @@ export class ApiRestService {
     })
   }
 
+  
+  delUsuario(id: any) {
+    return new Promise((resolve, reject) => {
+      this.http.delete(`${API_URL}/api/usuario/eliminar/${id}`).subscribe(
+        (data: RespuestaApi) => {
+          resolve(data);
+        },
+        (err) => {
+          reject(err);
+        }
+      )
+    })
+  }
+
+  updateUsuario(data:any) {
+    return new Promise((resolve, reject) => {
+      this.http.put(`${API_URL}/api/usuario/actualizar/${data._id}`, data).subscribe(
+        (data: RespuestaApi) => {
+          resolve(data);
+        },
+        (err) => {
+          reject(err);
+        }
+      )
+    })
+  }
+
   getUsuarioTodos() {
     return new Promise((resolve, reject) => {
       this.http.get(`${API_URL}/api/usuario/todos`).subscribe(
@@ -66,6 +93,32 @@ export class ApiRestService {
     })
   }
 
+  delCliente(id: any) {
+    return new Promise((resolve, reject) => {
+      this.http.delete(`${API_URL}/api/cliente/eliminar/${id}`).subscribe(
+        (data: RespuestaApi) => {
+          resolve(data);
+        },
+        (err) => {
+          reject(err);
+        }
+      )
+    })
+  }
+
+  updateCliente(data:any) {
+    return new Promise((resolve, reject) => {
+      this.http.put(`${API_URL}/api/cliente/actualizar/${data._id}`, data).subscribe(
+        (data: RespuestaApi) => {
+          resolve(data);
+        },
+        (err) => {
+          reject(err);
+        }
+      )
+    })
+  }
+
   getClienteTodos() {
     return new Promise((resolve, reject) => {
       this.http.get(`${API_URL}/api/cliente/todos`).subscribe(
@@ -84,6 +137,32 @@ export class ApiRestService {
   addProducto(producto: any) {
     return new Promise((resolve, reject) => {
       this.http.post(`${API_URL}/api/producto/add`, producto).subscribe(
+        (data: RespuestaApi) => {
+          resolve(data);
+        },
+        (err) => {
+          reject(err);
+        }
+      )
+    })
+  }
+
+  delProducto(id: any) {
+    return new Promise((resolve, reject) => {
+      this.http.delete(`${API_URL}/api/producto/eliminar/${id}`).subscribe(
+        (data: RespuestaApi) => {
+          resolve(data);
+        },
+        (err) => {
+          reject(err);
+        }
+      )
+    })
+  }
+
+  updateProducto(data:any) {
+    return new Promise((resolve, reject) => {
+      this.http.put(`${API_URL}/api/producto/actualizar/${data._id}`, data).subscribe(
         (data: RespuestaApi) => {
           resolve(data);
         },
