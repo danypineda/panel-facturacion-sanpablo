@@ -3,17 +3,19 @@
     <h2>DATOS DE <span>LA EMPRESA</span></h2>
 
     <div class="col-lg-12">
-      <input class="form-control round-input col-sm-11 input" formControlName="identificacion" type="text" placeholder="&#128100;  Nombre"
-        required>
-      <input class="form-control round-input col-sm-11 input" formControlName="identificacion" type="text" placeholder="&#128100;  Ruc"
-        required>
-      <input class="form-control round-input col-sm-11 input" formControlName="identificacion" type="text" placeholder="&#128100;  Dirección"
-        required>
-      <input class="form-control round-input col-sm-11 input"  type="text" placeholder="&#128100;  Telefono"
-        required>
-      <input class="form-control round-input col-sm-11 input" type="email" placeholder="&#128100;  Correo"
-        required>
-      <input class="form-control round-input col-sm-2 input" type="text" placeholder="&#128100;  Iva 12%" required>
+
+      <label for="" class="col-sm-2">NOMBRE</label><input class="form-control round-input col-sm-10 input" formControlName="identificacion" type="text" placeholder="&#128100;  Nombre"
+        readonly [value]="configuracion.nombre">
+      RUC<input class="form-control round-input col-sm-11 input" formControlName="identificacion" type="text" placeholder="&#128100;  Ruc"
+        readonly [value]="configuracion.ruc">
+        PROPIETARIO<input class="form-control round-input col-sm-11 input" type="text" placeholder="&#128100;  Iva 12%" readonly [value]="configuracion.propietario">
+      DIRECCIÓN<input class="form-control round-input col-sm-11 input" formControlName="identificacion" type="text" placeholder="&#128100;  Dirección"
+        readonly [value]="configuracion.direccion">
+      TELÉFONO<input class="form-control round-input col-sm-11 input"  type="text" placeholder="&#128100;  Telefono"
+        readonly [value]="configuracion.telefono">
+      CORREO<input class="form-control round-input col-sm-11 input" type="email" placeholder="&#128100;  Correo"
+        readonly [value]="configuracion.email">
+      IVA<input class="form-control round-input col-sm-2 input" type="text" placeholder="&#128100;  Iva 12%" readonly [value]="configuracion.iva">
     </div>
     <div class="centered">
       <button type="submit" class="btn btn-danger">Actualizar</button>

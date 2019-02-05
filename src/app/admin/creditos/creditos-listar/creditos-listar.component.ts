@@ -269,6 +269,25 @@ export class CreditosListarComponent implements OnInit {
     
   }
 
+  public pagarCuota(cuota:any):void{
+    this.apiRestSrv.pagarCuota(cuota._id).then(
+      (res: RespuestaApi) => {
+        switch (res.status) {
+          case 'ok':
+            this.Alerta("success", "Cuota pagada");
+            this.getCredito(this.facturaTmp._id);
+            break;
+          case 'fail':
+            this.Alerta("error", "Oops, tuvimos un problema al actualizar el registro, inténtalo nuevamente.");
+            break;
+        }
+      }, (err) => {
+        this.Alerta("error", "Oops, tuvimos un problema al actualizar el registro, inténtalo nuevamente.");
+      }
+    );
+    
+  }
+
 
   Alerta(tipo: string, mensaje: string) {
 
