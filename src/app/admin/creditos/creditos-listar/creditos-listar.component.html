@@ -1,144 +1,238 @@
 <div class="container">
-  <div class="row">
-      <div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
 
-          <div class="form__top">
-              <h2>ADMINISTRACIÓN <span>CREDITOS</span></h2>
-          </div>
-      </div>
-  </div>
-  <div class="row">
-      <div class="col">
-          <form class="navbar-form " [formGroup]="creditoForm">
+            <div class="form__top">
+                <h2>ADMINISTRACIÓN <span>CREDITOS</span></h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form class="navbar-form " [formGroup]="creditoForm">
 
-              <div class="row">
-                  <div class="col-md-6">
-                      <!-- C.I/RUC: <input class="form-control round-input input" type="text" required> -->
-                      C.I/RUC: <ng-multiselect-dropdown [placeholder]="'Seleccione un cliente'" [data]="listaClientes"
-                          [settings]="clientesSettings" (onSelect)="onItemSelect('ruc', $event)" (onSelectAll)="onSelectAll($event)"
-                          class="buscador-cliente">
-                      </ng-multiselect-dropdown>
-                  </div>
-                  <div class="col-md-6">
-                    Buscar factura: <ng-multiselect-dropdown [placeholder]="'Seleccione una factura a credito'"
-                        [data]="listaFacturas" [settings]="facturasSettings" (onSelect)="onItemSelect('factura', $event)"
-                        (onSelectAll)="onSelectAll($event)" class="buscador-cliente">
-                    </ng-multiselect-dropdown>
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- C.I/RUC: <input class="form-control round-input input" type="text" required> -->
+                        C.I/RUC: <ng-multiselect-dropdown [placeholder]="'Seleccione un cliente'" [data]="listaClientes"
+                            [settings]="clientesSettings" (onSelect)="onItemSelect('ruc', $event)"
+                            (onSelectAll)="onSelectAll($event)" class="buscador-cliente">
+                        </ng-multiselect-dropdown>
+                    </div>
+                    <div class="col-md-6">
+                        Buscar factura: <ng-multiselect-dropdown [placeholder]="'Seleccione una factura a credito'"
+                            [data]="listaFacturas" [settings]="facturasSettings"
+                            (onSelect)="onItemSelect('factura', $event)" (onSelectAll)="onSelectAll($event)"
+                            class="buscador-cliente">
+                        </ng-multiselect-dropdown>
+                    </div>
                 </div>
-              </div>
 
-              <div class="row">
-                  <div class="col-md-6">
-                      Nombre: <input class="form-control round-input input" type="text" [value]="nombres" readonly>
-                  </div>
-                  <div class="col-md-6">
-                      Teléfono: <input class="form-control round-input input" type="text" [value]="telefono" readonly>
-                  </div>
-              </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        Nombre: <input class="form-control round-input input" type="text" [value]="nombres" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        Teléfono: <input class="form-control round-input input" type="text" [value]="telefono" readonly>
+                    </div>
+                </div>
 
-              <div class="row">
-                  <div class="col-md-6">
-                    Saldo Total: <input class="form-control round-input input" type="number" formControlName="saldoTotal"
-                    readonly>
-                  </div>
-                  <div class="col-md-6">
-                      Abono: <input class="form-control round-input input" type="text" formControlName="abono">
+                <div class="row">
+                    <div class="col-md-6">
+                        Saldo Total: <input class="form-control round-input input" type="number"
+                            formControlName="saldoTotal" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        Abono: <input class="form-control round-input input" type="text" formControlName="abono">
 
-                  </div>
-              </div>
+                    </div>
+                </div>
 
-          </form>
-      </div>
+            </form>
+        </div>
 
-      <div class="col-lg-12">
-          <section class="panel">
+        <div class="col-lg-12">
+            <section class="panel">
 
-              <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator" [columnMode]="'force'"
-                  [headerHeight]="40" [summaryRow]="true" [summaryPosition]="'bottom'" [footerHeight]="40" [limit]="6"
-                  [rowHeight]="'auto'" [reorderable]="reorderable">
+                <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                    [columnMode]="'force'" [headerHeight]="40" [summaryRow]="true" [summaryPosition]="'bottom'"
+                    [footerHeight]="40" [limit]="6" [rowHeight]="'auto'" [reorderable]="reorderable">
 
-                  <ngx-datatable-column>
-                      <ng-template let-column="column" ngx-datatable-header-template>
-                          MES
-                      </ng-template>
-                      <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
-                          {{row.mes | date:'short'}}
-                      </ng-template>
-                  </ngx-datatable-column>
+                    <ngx-datatable-column>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            MES
+                        </ng-template>
+                        <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                            {{row.mes | date:'short'}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-                  <ngx-datatable-column>
-                      <ng-template let-column="column" ngx-datatable-header-template>
-                          SALDO INICIAL
-                      </ng-template>
-                      <ng-template let-row="row" ngx-datatable-cell-template>
-                          {{row.inicial | currency}}
-                      </ng-template>
-                  </ngx-datatable-column>
+                    <ngx-datatable-column>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            SALDO INICIAL
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.inicial | currency}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-                  <ngx-datatable-column>
-                      <ng-template let-column="column" ngx-datatable-header-template>
-                          AMORTIZACIÓN
-                      </ng-template>
-                      <ng-template let-row="row" ngx-datatable-cell-template>
-                          {{row.amortizacion | currency}}
-                      </ng-template>
-                  </ngx-datatable-column>
+                    <ngx-datatable-column>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            AMORTIZACIÓN
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.amortizacion | currency}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-                  <ngx-datatable-column>
-                      <ng-template let-column="column" ngx-datatable-header-template>
-                          INTERESES
-                      </ng-template>
-                      <ng-template let-row="row" ngx-datatable-cell-template>
-                          {{row.intereses | currency}}
-                      </ng-template>
-                  </ngx-datatable-column>
+                    <ngx-datatable-column>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            INTERESES
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.intereses | currency}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-                  <ngx-datatable-column>
-                      <ng-template let-column="column" ngx-datatable-header-template>
-                          CUOTA MES
-                      </ng-template>
-                      <ng-template let-row="row" ngx-datatable-cell-template>
-                          {{row.cuotaMes | currency}}
-                      </ng-template>
-                  </ngx-datatable-column>
+                    <ngx-datatable-column>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            CUOTA MES
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.cuotaMes | currency}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-                  <ngx-datatable-column>
-                      <ng-template let-column="column" ngx-datatable-header-template>
-                          SALDO FINAL
-                      </ng-template>
-                      <ng-template let-row="row" ngx-datatable-cell-template>
-                          {{row.saldo | currency}}
-                      </ng-template>
-                  </ngx-datatable-column>
+                    <ngx-datatable-column>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            SALDO FINAL
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.saldo | currency}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-                  <ngx-datatable-column [width]='90'>
-                      <ng-template let-column="column" ngx-datatable-header-template>
-                          PAGADO
-                      </ng-template>
-                      <ng-template let-row="row" ngx-datatable-cell-template>
-                        <input type="checkbox" [checked]="row.pagada" onclick="return false;"> 
-                      </ng-template>
-                  </ngx-datatable-column>
+                    <ngx-datatable-column [width]='90'>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            PAGADO
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <input type="checkbox" [checked]="row.pagada" onclick="return false;">
+                        </ng-template>
+                    </ngx-datatable-column>
 
-                  <ngx-datatable-column [width]='250'>
-                      <ng-template let-column="column" ngx-datatable-header-template>
-                          OPCIONES
-                      </ng-template>
-                      <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex">
+                    <ngx-datatable-column [width]='250'>
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            OPCIONES
+                        </ng-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template let-rowIndex="rowIndex">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-success"  (click)="pagarCuota(row)" [disabled]="row.pagada" >PAGAR</button>
-                        <button type="button" class="btn btn-warning"  (click)="imprimirRecibo(row)">IMPRIMIR</button>
-                        </div>
-                      </ng-template>
-                  </ngx-datatable-column>
+                                <button type="button" class="btn btn-success" (click)="pagarCuota(row)"
+                                    [disabled]="row.pagada">PAGAR</button>
+                                <button type="button" class="btn btn-warning" (click)="imprimirRecibo(row)"
+                                    [disabled]="!row.pagada">IMPRIMIR</button>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
 
-              </ngx-datatable>
+                </ngx-datatable>
 
 
-          </section>
-          <div class="btn__form">
-              <button class="btn__reset">FACTURAR</button>
-          </div>
-      </div>
-  </div>
+            </section>
+            <!-- <div class="btn__form">
+                <button class="btn__reset" (click)="generatePDF()">FACTURAR</button>
+            </div> -->
+        </div>
+    </div>
+    <div class="tablePdf">
+        <table id="contentToConvert"
+            style="border-collapse:collapse;border-spacing:0;table-layout: fixed; width: 1260px" class="tg">
+            <colgroup>
+                <col style="width: 198px">
+                <col style="width: 172px">
+                <col style="width: 516px">
+                <col style="width: 374px">
+            </colgroup>
+            <tr>
+                <th style="font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;color:#000000;text-align:left;vertical-align:top"
+                    colspan="2" rowspan="2"> <img alt="" src="assets/img/LogoSanJose.png" width="100"></th>
+                <th
+                    style="font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;color:#000000;text-align:center;vertical-align:top">
+                    001-0002-003</th>
+                <th
+                    style="font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;color:#000000;text-align:center;vertical-align:top">
+                    {{datosPdf.fecha}}</th>
+            </tr>
+            <tr>
+                <td
+                    style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;font-weight:bold;background-color:#efefef;color:#000000;text-align:center;vertical-align:top">
+                    RECIBO</td>
+                <td
+                    style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;font-weight:bold;background-color:#efefef;color:#000000;text-align:center;vertical-align:top">
+                    FECHA</td>
+            </tr>
+            <tr>
+                <td
+                    style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;font-weight:bold;background-color:#efefef;color:#000000;text-align:left;vertical-align:top">
+                    RECIBÍ DE:</td>
+                <td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;color:#000000;text-align:left;vertical-align:top"
+                    colspan="3">
+                    {{datosPdf.nombres}}
+                </td>
+            </tr>
+            <tr>
+                <td
+                    style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;font-weight:bold;background-color:#efefef;color:#000000;text-align:left;vertical-align:top">
+                    CANTIDAD DE:</td>
+                <td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;color:#000000;text-align:left;vertical-align:top"
+                    colspan="3">
+                    {{datosPdf.cuota | currency}}
+                </td>
+            </tr>
+            <tr>
+                <td
+                    style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;font-weight:bold;background-color:#efefef;color:#000000;text-align:left;vertical-align:top">
+                    POR CONCEPTO DE:</td>
+                <td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;color:#000000;text-align:left;vertical-align:top"
+                    colspan="3">
+                    Pago crédito de la Venta N° {{datosPdf.factura}}
+                </td>
+            </tr>
+            <tr>
+                <td
+                    style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;font-weight:bold;background-color:#efefef;color:#000000;text-align:left;vertical-align:top">
+                    VALOR TOTAL: $</td>
+                <td
+                    style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;color:#000000;text-align:left;vertical-align:top">
+                    {{datosPdf.total | currency}}</td>
+                <td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;color:#000000;text-align:left;vertical-align:top"
+                    rowspan="2"></td>
+                <td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;color:#000000;text-align:left;vertical-align:top"
+                    rowspan="2"></td>
+            </tr>
+            <tr>
+                <td
+                    style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;font-weight:bold;background-color:#efefef;color:#000000;text-align:left;vertical-align:top">
+                    ABONO: $</td>
+                <td
+                    style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;color:#000000;text-align:left;vertical-align:top">
+                    {{datosPdf.abono | currency}}</td>
+            </tr>
+            <tr>
+                <td
+                    style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;font-weight:bold;background-color:#efefef;color:#000000;text-align:left;vertical-align:top">
+                    SALDO: $</td>
+                <td
+                    style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;color:#000000;text-align:left;vertical-align:top">
+                    {{datosPdf.saldo | currency}}</td>
+                <td
+                    style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;font-weight:bold;background-color:#efefef;color:#000000;text-align:center;vertical-align:top">
+                    F. AUTORIZADA</td>
+                <td
+                    style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#680100;font-weight:bold;background-color:#efefef;color:#000000;text-align:center;vertical-align:top">
+                    F. CLIENTE</td>
+            </tr>
+        </table>
+        <pre>{{datosPdf | json}}</pre>
+    </div>
 </div>

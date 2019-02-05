@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { Configuracion } from '../../../core/models/configuracion.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
@@ -7,6 +7,8 @@ import { AlertService } from 'ngx-alerts';
 import { RespuestaApi } from '../../../core/models/respuesta-api.model';
 import * as moment from 'moment';
 import { TOKEN_KEY } from '../../../../environments/environment';
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-creditos-listar',
@@ -34,6 +36,7 @@ export class CreditosListarComponent implements OnInit {
   direccion = '';
   cantidadTmp: number = 1;
   facturaTmp: any = {};
+  datosPdf: any = {};
 
   @ViewChild(DatatableComponent) table: DatatableComponent;
 
@@ -41,6 +44,7 @@ export class CreditosListarComponent implements OnInit {
     private readonly apiRestSrv: ApiRestService,
     private readonly formBuilder: FormBuilder,
     private readonly alertService: AlertService,
+    private readonly zone: NgZone,
   ) {
     this.cargarConfiguracion();
 
@@ -164,7 +168,7 @@ export class CreditosListarComponent implements OnInit {
     for (let index = 0; index < dataCalcular.numCuotas; index++) {
       let interesMes = Number((valorTotal * (interes / 100)).toFixed(2));
       let amortizacion = Number((cuotaMes - interesMes).toFixed(2));
-      let saldo =  Number((valorTotal - amortizacion).toFixed(2));
+      let saldo = Number((valorTotal - amortizacion).toFixed(2));
       if (saldo < 0.00) {
         saldo = 0.00
       }
@@ -179,15 +183,15 @@ export class CreditosListarComponent implements OnInit {
       tablaAmortizacion.push(item);
       valorTotal = saldo;
       acumuladorCuotaMes += cuotaMes;
-      mes = moment(dataCalcular.fechaPrimerPago).add(index+1, 'M').format("YYYY-MM-DD");
+      mes = moment(dataCalcular.fechaPrimerPago).add(index + 1, 'M').format("YYYY-MM-DD");
     }
 
-    
+
     var total = acumuladorCuotaMes + Number(dataCalcular.abono);
     this.loadingIndicator = false;
-        this.temp = [...tablaAmortizacion];
-        this.rows = tablaAmortizacion;
-        this.creditoForm.patchValue({ totalCredito:  total});
+    this.temp = [...tablaAmortizacion];
+    this.rows = tablaAmortizacion;
+    this.creditoForm.patchValue({ totalCredito: total });
     // let item = {
     //   producto: this.facturaTmp._id,
     //   cantidad: this.cantidadTmp,
@@ -255,7 +259,7 @@ export class CreditosListarComponent implements OnInit {
       (res: RespuestaApi) => {
         console.log(res.response);
         this.rows = res.response[0].tablaAmortizacion;
-        this.loadingIndicator= false;
+        this.loadingIndicator = false;
       }, (err) => {
         console.error(err);
 
@@ -263,13 +267,7 @@ export class CreditosListarComponent implements OnInit {
     );
   }
 
-  public imprimirRecibo(cuota:any):void{
-    console.log("Recibo", cuota);
-    alert(JSON.stringify(cuota));
-    
-  }
-
-  public pagarCuota(cuota:any):void{
+  public pagarCuota(cuota: any): void {
     this.apiRestSrv.pagarCuota(cuota._id).then(
       (res: RespuestaApi) => {
         switch (res.status) {
@@ -285,9 +283,47 @@ export class CreditosListarComponent implements OnInit {
         this.Alerta("error", "Oops, tuvimos un problema al actualizar el registro, inténtalo nuevamente.");
       }
     );
-    
+
   }
 
+  public imprimirRecibo(cuota: any): void {
+    console.log(cuota);
+    
+    this.zone.run(()=>{
+      this.datosPdf = {
+        fecha: this.fechaAcctual,
+        nombres: this.nombres,
+        cuota: cuota.cuotaMes,
+        factura: this.facturaTmp.numFactura,
+        total: this.creditoForm.value.saldoTotal,
+        abono: this.creditoForm.value.abono,
+        saldo: cuota.saldo,
+  
+      };
+    });
+    let that = this;
+    setTimeout(function()
+    {
+      var data = document.getElementById('contentToConvert');
+      console.log("datos", data);
+      html2canvas(data).then(canvas => {
+        // Few necessary setting options 
+        var imgWidth = 208;
+        var pageHeight = 295;
+        var imgHeight = canvas.height * imgWidth / canvas.width;
+        var heightLeft = imgHeight;
+  
+        const contentDataURL = canvas.toDataURL('image/png')
+        let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF 
+        var position = 0;
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+        pdf.save(`${that.facturaTmp.numFactura}-${that.fechaAcctual}`); // Generated PDF  
+      });
+
+    }, 2000);
+
+    
+  }
 
   Alerta(tipo: string, mensaje: string) {
 
