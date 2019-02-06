@@ -15,10 +15,7 @@
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
                 <input type="password" class="form-control" placeholder="Contraseña" formControlName="password">
             </div>
-            <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Recordarme
-                <span class="pull-right"> <a href="#"> Olvide mi contraseña?</a></span>
-            </label>
+            
             <button class="btn btn-primary btn-lg btn-block round-input" [disabled]="loginForm.invalid" (click)="login(loginForm.getRawValue())">Iniciar Sesión</button>
         </div>
     </form>

@@ -28,3 +28,9 @@ body {
 .smart-table-input{
 	color: black !important;
 }
+
+.multiselect-dropdown .dropdown-btn .selected-item {
+    border: 1px solid #4a342e !important;
+    background: #4a342e6d !important;
+    color: rgb(0, 0, 0) !important;
+}

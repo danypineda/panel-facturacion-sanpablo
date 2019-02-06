@@ -6,6 +6,8 @@ import * as moment from 'moment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TOKEN_KEY } from '../../../../environments/environment';
 import { AlertService } from 'ngx-alerts';
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-ventas-agregar',
@@ -234,6 +236,29 @@ export class VentasAgregarComponent implements OnInit {
     var total = (subtotal - this.facturacionForm.value.descuento) + iva;
 
     this.facturacionForm.patchValue({ subtotal: subtotal, iva: iva, total: total });
+  }
+
+  public imprimirRecibo(): void {
+    
+      var data = document.getElementById('contentToConvert');
+      console.log("datos", data);
+      html2canvas(data).then(canvas => {
+        // Few necessary setting options 
+        var imgWidth = 208;
+        var pageHeight = 295;
+        var imgHeight = canvas.height * imgWidth / canvas.width;
+        var heightLeft = imgHeight;
+  
+        const contentDataURL = canvas.toDataURL('image/png')
+        let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF 
+        var position = 0;
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+        pdf.save(`prueba`); // Generated PDF  
+      });
+
+    
+
+    
   }
 
   Alerta(tipo: string, mensaje: string) {

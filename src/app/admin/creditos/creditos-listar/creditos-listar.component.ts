@@ -268,28 +268,34 @@ export class CreditosListarComponent implements OnInit {
   }
 
   public pagarCuota(cuota: any): void {
-    this.apiRestSrv.pagarCuota(cuota._id).then(
-      (res: RespuestaApi) => {
-        switch (res.status) {
-          case 'ok':
-            this.Alerta("success", "Cuota pagada");
-            this.getCredito(this.facturaTmp._id);
-            break;
-          case 'fail':
-            this.Alerta("error", "Oops, tuvimos un problema al actualizar el registro, inténtalo nuevamente.");
-            break;
+
+    if (window.confirm('¿Deseas pagar esta cuota?')) {
+      this.apiRestSrv.pagarCuota(cuota._id).then(
+        (res: RespuestaApi) => {
+          switch (res.status) {
+            case 'ok':
+              this.Alerta("success", "Cuota pagada");
+              this.getCredito(this.facturaTmp._id);
+              break;
+            case 'fail':
+              this.Alerta("error", "Oops, tuvimos un problema al actualizar el registro, inténtalo nuevamente.");
+              break;
+          }
+        }, (err) => {
+          this.Alerta("error", "Oops, tuvimos un problema al actualizar el registro, inténtalo nuevamente.");
         }
-      }, (err) => {
-        this.Alerta("error", "Oops, tuvimos un problema al actualizar el registro, inténtalo nuevamente.");
-      }
-    );
+      );
+    } else {
+    }
+
+
 
   }
 
   public imprimirRecibo(cuota: any): void {
     console.log(cuota);
-    
-    this.zone.run(()=>{
+
+    this.zone.run(() => {
       this.datosPdf = {
         fecha: this.fechaAcctual,
         nombres: this.nombres,
@@ -298,12 +304,11 @@ export class CreditosListarComponent implements OnInit {
         total: this.creditoForm.value.saldoTotal,
         abono: this.creditoForm.value.abono,
         saldo: cuota.saldo,
-  
+
       };
     });
     let that = this;
-    setTimeout(function()
-    {
+    setTimeout(function () {
       var data = document.getElementById('contentToConvert');
       console.log("datos", data);
       html2canvas(data).then(canvas => {
@@ -312,7 +317,7 @@ export class CreditosListarComponent implements OnInit {
         var pageHeight = 295;
         var imgHeight = canvas.height * imgWidth / canvas.width;
         var heightLeft = imgHeight;
-  
+
         const contentDataURL = canvas.toDataURL('image/png')
         let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF 
         var position = 0;
@@ -322,7 +327,7 @@ export class CreditosListarComponent implements OnInit {
 
     }, 2000);
 
-    
+
   }
 
   Alerta(tipo: string, mensaje: string) {
