@@ -46,7 +46,7 @@
 
 
 					<div class="btn__form">
-						<button class="btn__submit" [disabled]="clientesForm.invalid" (click)="agregarCliente(clientesForm.getRawValue())">REGISTRAR</button>
+						<button class="btn__submit" [disabled]="clientesForm.invalid" mat-dialog-close (click)="agregarCliente(clientesForm.getRawValue())">REGISTRAR</button>
 						<button class="btn__reset" type="reset">LIMPIAR</button>
 					</div>
 			</form>

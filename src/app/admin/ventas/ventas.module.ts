@@ -8,6 +8,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AlertModule } from 'ngx-alerts';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ClientesAgregarComponent } from '../clientes/clientes-agregar/clientes-agregar.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -18,7 +21,10 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     AlertModule.forRoot({ maxMessages: 5, timeout: 5000 }),
     NgMultiSelectDropDownModule.forRoot(),
     NgxDatatableModule,
+    MatDialogModule,
+    SharedModule,
   ],
   declarations: [VentasComponent, VentasAgregarComponent, VentasListarComponent],
+  entryComponents: [ClientesAgregarComponent]
 })
 export class VentasModule { }

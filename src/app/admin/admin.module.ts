@@ -11,6 +11,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlertModule } from 'ngx-alerts';
+import { ClientesAgregarComponent } from './clientes/clientes-agregar/clientes-agregar.component';
 
 @NgModule({
     imports: [
@@ -50,6 +51,8 @@ import { AlertModule } from 'ngx-alerts';
         AdminComponent,
         DashboardComponent,
         MenuLateralComponent,
+    ],
+    exports: [
     ]
 })
 export class AdminModule { }

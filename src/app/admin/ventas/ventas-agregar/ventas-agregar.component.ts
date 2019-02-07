@@ -8,6 +8,8 @@ import { TOKEN_KEY } from '../../../../environments/environment';
 import { AlertService } from 'ngx-alerts';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { MatDialog } from '@angular/material';
+import { ClientesAgregarComponent } from '../../clientes/clientes-agregar/clientes-agregar.component';
 
 @Component({
   selector: 'app-ventas-agregar',
@@ -36,6 +38,7 @@ export class VentasAgregarComponent implements OnInit {
     private readonly apiRestSrv: ApiRestService,
     private readonly formBuilder: FormBuilder,
     private readonly alertService: AlertService,
+    public dialog: MatDialog,
   ) {
     this.cargarConfiguracion();
 
@@ -75,7 +78,7 @@ export class VentasAgregarComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
+  obtenerClientes():void{
     this.apiRestSrv.getClienteTodos().then(
       (res: RespuestaApi) => {
         console.log(res.response);
@@ -85,6 +88,11 @@ export class VentasAgregarComponent implements OnInit {
 
       }
     );
+  }
+
+  ngOnInit() {
+    
+    this.obtenerClientes();
 
     this.apiRestSrv.getProductoTodos().then(
       (res: RespuestaApi) => {
@@ -167,15 +175,27 @@ export class VentasAgregarComponent implements OnInit {
   agregarProducto(): void {
     if (this.productoTmp._id) {
 
-      let item = {
-        producto: this.productoTmp._id,
-        cantidad: this.cantidadTmp,
-        descripcion: this.productoTmp.detalle,
-        valorUnitario: this.productoTmp.precio,
-        valorVenta: this.cantidadTmp * this.productoTmp.precio,
+      var productoExistente: boolean = false;
+      this.listaVenta.forEach(producto => {
+        if (producto.producto == this.productoTmp._id) {
+          producto.cantidad = producto.cantidad + this.cantidadTmp;
+          producto.valorVenta = producto.cantidad * this.productoTmp.precio;
+          productoExistente = true;
+        }
+      });
+
+      if (!productoExistente) {
+        let item = {
+          producto: this.productoTmp._id,
+          cantidad: this.cantidadTmp,
+          descripcion: this.productoTmp.detalle,
+          valorUnitario: this.productoTmp.precio,
+          valorVenta: this.cantidadTmp * this.productoTmp.precio,
+        }
+  
+        this.listaVenta.push(item);
       }
 
-      this.listaVenta.push(item);
 
       var subtotal = 0;
       this.listaVenta.forEach(venta => {
@@ -256,9 +276,18 @@ export class VentasAgregarComponent implements OnInit {
         pdf.save(`prueba`); // Generated PDF  
       });
 
-    
+  }
 
-    
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ClientesAgregarComponent, {
+      width: '50vw',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.obtenerClientes();
+    });
+
   }
 
   Alerta(tipo: string, mensaje: string) {

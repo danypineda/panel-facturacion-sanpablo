@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AlertModule } from 'ngx-alerts';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { SharedModule } from '../../shared/shared.module';
+import { MatDialogModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     ReactiveFormsModule,
     NgxDatatableModule,
     Ng2SmartTableModule,
+    SharedModule,
+    MatDialogModule,
   ],
-  declarations: [ClientesComponent, ClientesListarComponent, ClientesAgregarComponent]
+  declarations: [ClientesComponent, ClientesListarComponent]
 })
 export class ClientesModule { }

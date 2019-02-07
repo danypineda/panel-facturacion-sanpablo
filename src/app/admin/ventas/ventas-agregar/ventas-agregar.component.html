@@ -25,7 +25,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5">
             <!-- C.I/RUC: <input class="form-control round-input input" type="text" required> -->
             C.I/RUC: <ng-multiselect-dropdown
             [placeholder]="'Seleccione un cliente'"
@@ -36,6 +36,10 @@
             class="buscador-cliente"
           >
           </ng-multiselect-dropdown>
+          </div>
+          <div class="col-md-1">
+            <p>&nbsp;</p>
+            <button type="button" class="btn btn-success" (click)="openDialog()">+</button>
           </div>
           <div class="col-md-6">
             Fecha de emisión: <input class="form-control round-input input" type="text" formControlName="fecha" readonly>
