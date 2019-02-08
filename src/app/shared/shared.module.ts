@@ -6,6 +6,7 @@ import { AlertModule } from 'ngx-alerts';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { CategoriasAgregarComponent } from '../admin/categorias/categorias-agregar/categorias-agregar.component';
 
 @NgModule({
     imports: [
@@ -15,9 +16,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
         NgxDatatableModule,
         Ng2SmartTableModule,
     ],
-    declarations: [RequiredLabelDirective, ClientesAgregarComponent],
+    declarations: [RequiredLabelDirective, ClientesAgregarComponent, CategoriasAgregarComponent],
     exports: [
-        RequiredLabelDirective, ClientesAgregarComponent
+        RequiredLabelDirective, ClientesAgregarComponent, CategoriasAgregarComponent
     ]
 })
 export class SharedModule { }

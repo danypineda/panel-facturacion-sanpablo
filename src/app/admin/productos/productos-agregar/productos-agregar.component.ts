@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertService } from 'ngx-alerts';
 import { ApiRestService } from '../../../core/services/api-rest.service';
 import { RespuestaApi } from '../../../core/models/respuesta-api.model';
+import { MatDialog } from '@angular/material';
+import { CategoriasAgregarComponent } from '../../categorias/categorias-agregar/categorias-agregar.component';
 
 @Component({
   selector: 'app-productos-agregar',
@@ -13,10 +15,12 @@ export class ProductosAgregarComponent implements OnInit {
 
   // Paso 1
   public productosForm: FormGroup;
+  public categorias: any = [];
 
   constructor(
     private formBuild: FormBuilder,
     private readonly apiRestSrv: ApiRestService,
+    public dialog: MatDialog,
     private readonly alertService: AlertService,
   ) { }
   ngOnInit() {
@@ -30,6 +34,19 @@ export class ProductosAgregarComponent implements OnInit {
       precio: ["", Validators.compose([Validators.required])],
       stock: ["", Validators.compose([Validators.required])],
     });
+
+    this.cargarDatos();
+  }
+
+  private cargarDatos(): void {
+    this.apiRestSrv.getCategoriaTodos().then(
+      (res: RespuestaApi) => {
+        this.categorias = res.response;
+      }, (err) => {
+        console.error(err);
+
+      }
+    );
   }
 
   public crearProducto(data: any): void {
@@ -51,6 +68,18 @@ export class ProductosAgregarComponent implements OnInit {
         this.Alerta("error", "Oops, tuvimos un problema al crear el registro, inténtalo nuevamente.");
       }
     );
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CategoriasAgregarComponent, {
+      width: '50vw',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.cargarDatos();
+    });
+
   }
 
   Alerta(tipo: string, mensaje: string) {

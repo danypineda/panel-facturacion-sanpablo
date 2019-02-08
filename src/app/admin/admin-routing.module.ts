@@ -23,6 +23,11 @@ const routes: Routes = [
 		loadChildren: './clientes/clientes.module#ClientesModule'
 	},
 	{
+		path: 'categorias',
+		component: AdminComponent,
+		loadChildren: './categorias/categorias.module#CategoriasModule'
+	},
+	{
 		path: 'productos',
 		component: AdminComponent,
 		loadChildren: './productos/productos.module#ProductosModule'

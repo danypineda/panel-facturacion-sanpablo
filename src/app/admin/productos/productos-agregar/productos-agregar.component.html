@@ -5,8 +5,17 @@
 
 			<input class="form-control round-input col-sm-11 input" formControlName="codigo" type="text" placeholder="&#128100;  Codigo"
 			 required autofocus>
-			<input class="form-control round-input col-sm-11 input" formControlName="categoria" type="text" placeholder="&#128100;  Categoria"
-			 required autofocus>
+			 <div class="col-sm-11">
+				 <div class="row">
+					 <label for="" class="col-sm-2">Categoría:</label> 
+					 <select class="form-control round-input input col-sm-9" placeholder="Categoria" formControlName="categoria">
+						<option *ngFor="let item of categorias" [value]="item.nombre">{{item.nombre}}</option>
+					  </select>
+					  <div class="col-md-1">
+							<button type="button" class="btn btn-success" (click)="openDialog()">+</button>
+						  </div>
+				 </div>
+			 </div>
 			<input class="form-control round-input col-sm-11 input" formControlName="nombre" type="email" placeholder="&#128100;  Nombre"
 			 required>
 			<input class="form-control round-input col-sm-11 input" formControlName="detalle" type="text" placeholder="&#128100;  Detalle"
@@ -15,6 +24,7 @@
 			 step="0.01" placeholder="&#128100;  Precio" required>
 			<input class="form-control round-input col-sm-11 input" formControlName="stock" type="number" min="0" max="10000"
 			 step="1" placeholder="&#128100;  Stock" required>
+			 <div *ngIf="productosForm.invalid" style="color: red; background-color: #00000071">*Algunos campos estan incorrectos verifiquelos antes de registrar</div>
 			<div class="btn__form">
 				<button class="btn__submit" [disabled]="productosForm.invalid" (click)="crearProducto(productosForm.getRawValue())">REGISTRAR</button>
 				<button class="btn__reset" type="reset">LIMPIAR</button>

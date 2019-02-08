@@ -295,4 +295,58 @@ export class ApiRestService {
       )
     })
   }
+
+  // NOTE: CATEGORIAS #############################################################################################
+
+addCategoria(usuario: any) {
+  return new Promise((resolve, reject) => {
+    this.http.post(`${API_URL}/api/categoria/add`, usuario).subscribe(
+      (data: RespuestaApi) => {
+        resolve(data);
+      },
+      (err) => {
+        reject(err);
+      }
+    )
+  })
+}
+
+delCategoria(id: any) {
+  return new Promise((resolve, reject) => {
+    this.http.delete(`${API_URL}/api/categoria/eliminar/${id}`).subscribe(
+      (data: RespuestaApi) => {
+        resolve(data);
+      },
+      (err) => {
+        reject(err);
+      }
+    )
+  })
+}
+
+updateCategoria(data: any) {
+  return new Promise((resolve, reject) => {
+    this.http.put(`${API_URL}/api/categoria/actualizar/${data._id}`, data).subscribe(
+      (data: RespuestaApi) => {
+        resolve(data);
+      },
+      (err) => {
+        reject(err);
+      }
+    )
+  })
+}
+
+getCategoriaTodos() {
+  return new Promise((resolve, reject) => {
+    this.http.get(`${API_URL}/api/categoria/todos`).subscribe(
+      (data: RespuestaApi) => {
+        resolve(data);
+      },
+      (err) => {
+        reject(err);
+      }
+    )
+  })
+}
 }

@@ -59,6 +59,22 @@ export class MenuLateralComponent implements OnInit {
         ]
       },
       {
+        label: 'Categorias',
+        icon: 'local_offer',
+        items: [
+          {
+            label: 'Agregar',
+            icon: 'category',
+            link: '/admin/categorias/agregar'
+          },
+          {
+            label: 'Listar',
+            icon: 'format_list_numbered',
+            link: '/admin/categorias/listar'
+          }
+        ]
+      },
+      {
         label: 'Productos',
         icon: 'card_giftcard',
         items: [
